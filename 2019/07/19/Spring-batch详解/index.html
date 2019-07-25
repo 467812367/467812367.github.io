@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>KAMI</title>
+<title>Spring-batch 详解 - KAMI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Spring-batch 详解各个表的含义123456789batch_job_execution (执行任务详情，成功，失败，时间等)batch_job_execution_context ()batch_job_execution_params (执行任务的参数表)batch_job_execution_seq  (序列号)batch_job_instance (执行任务记录)batch_j">
+    <meta name="description" content="各个表的含义123456789batch_job_execution (执行任务详情，成功，失败，时间等)batch_job_execution_context ()batch_job_execution_params (执行任务的参数表)batch_job_execution_seq  (序列号)batch_job_instance (执行任务记录)batch_job_seq (序列号)batc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KAMI">
+<meta property="og:title" content="Spring-batch 详解">
 <meta property="og:url" content="http://yoursite.com/2019/07/19/Spring-batch详解/index.html">
 <meta property="og:site_name" content="KAMI">
-<meta property="og:description" content="Spring-batch 详解各个表的含义123456789batch_job_execution (执行任务详情，成功，失败，时间等)batch_job_execution_context ()batch_job_execution_params (执行任务的参数表)batch_job_execution_seq  (序列号)batch_job_instance (执行任务记录)batch_j">
+<meta property="og:description" content="各个表的含义123456789batch_job_execution (执行任务详情，成功，失败，时间等)batch_job_execution_context ()batch_job_execution_params (执行任务的参数表)batch_job_execution_seq  (序列号)batch_job_instance (执行任务记录)batch_job_seq (序列号)batc">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-19T09:11:34.811Z">
+<meta property="og:updated_time" content="2019-07-25T08:28:26.559Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KAMI">
-<meta name="twitter:description" content="Spring-batch 详解各个表的含义123456789batch_job_execution (执行任务详情，成功，失败，时间等)batch_job_execution_context ()batch_job_execution_params (执行任务的参数表)batch_job_execution_seq  (序列号)batch_job_instance (执行任务记录)batch_j">
+<meta name="twitter:title" content="Spring-batch 详解">
+<meta name="twitter:description" content="各个表的含义123456789batch_job_execution (执行任务详情，成功，失败，时间等)batch_job_execution_context ()batch_job_execution_params (执行任务的参数表)batch_job_execution_seq  (序列号)batch_job_instance (执行任务记录)batch_job_seq (序列号)batc">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -93,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt height="28">
+                <img src="/images/logo.svg" alt="Spring-batch 详解" height="28">
             
             </a>
         </div>
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 162 个字)
+                    1 分钟 读完 (大约 158 个字)
                 </span>
                 
                 
@@ -150,12 +150,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                
+                Spring-batch 详解
             
         </h1>
         <div class="content">
-            <hr>
-<h2 id="Spring-batch-详解"><a href="#Spring-batch-详解" class="headerlink" title="Spring-batch 详解"></a>Spring-batch 详解</h2><h3 id="各个表的含义"><a href="#各个表的含义" class="headerlink" title="各个表的含义"></a>各个表的含义</h3><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">batch_job_execution (执行任务详情，成功，失败，时间等)</span><br><span class="line">batch_job_execution_context ()</span><br><span class="line">batch_job_execution_params (执行任务的参数表)</span><br><span class="line">batch_job_execution_seq  (序列号)</span><br><span class="line">batch_job_instance (执行任务记录)</span><br><span class="line">batch_job_seq (序列号)</span><br><span class="line">batch_step_execution (步奏记录表)</span><br><span class="line">batch_step_execution_context</span><br><span class="line">batch_step_execution_seq (序列号)</span><br></pre></td></tr></table></figure>
+            <h3 id="各个表的含义"><a href="#各个表的含义" class="headerlink" title="各个表的含义"></a>各个表的含义</h3><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">batch_job_execution (执行任务详情，成功，失败，时间等)</span><br><span class="line">batch_job_execution_context ()</span><br><span class="line">batch_job_execution_params (执行任务的参数表)</span><br><span class="line">batch_job_execution_seq  (序列号)</span><br><span class="line">batch_job_instance (执行任务记录)</span><br><span class="line">batch_job_seq (序列号)</span><br><span class="line">batch_step_execution (步奏记录表)</span><br><span class="line">batch_step_execution_context</span><br><span class="line">batch_step_execution_seq (序列号)</span><br></pre></td></tr></table></figure>
 
 <h3 id="碰到的一些问题"><a href="#碰到的一些问题" class="headerlink" title="碰到的一些问题"></a>碰到的一些问题</h3><ul>
 <li><p>(A job instance already exists and is complete for parameters={run.id=1}.  If you want to run this job again, change the parameters.)</p>
@@ -214,14 +213,14 @@
         <div class="level-start">
             <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/25/ActiveMQ/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item"></span>
+                <span class="level-item">ActiveMQ 教程</span>
             </a>
         </div>
         
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/11/AQS原理/">
-                <span class="level-item"></span>
+                <span class="level-item">ABS执行原理</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -394,14 +393,14 @@
             
             <a href="/2019/07/25/ActiveMQ/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -413,14 +412,14 @@
             
             <a href="/2019/07/19/Spring-batch详解/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -432,14 +431,14 @@
             
             <a href="/2019/07/11/AQS原理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -529,14 +528,14 @@
             
             <a href="/2019/07/25/ActiveMQ/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -548,14 +547,14 @@
             
             <a href="/2019/07/19/Spring-batch详解/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -567,14 +566,14 @@
             
             <a href="/2019/07/11/AQS原理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -654,11 +653,11 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt height="28">
+                    <img src="/images/logo.svg" alt="Spring-batch 详解" height="28">
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 &nbsp;
+                &copy; 2019 Spring-batch 详解&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>KAMI</title>
+<title>ABS执行原理 - KAMI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="ABS执行原理在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
+    <meta name="description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KAMI">
+<meta property="og:title" content="ABS执行原理">
 <meta property="og:url" content="http://yoursite.com/2019/07/11/AQS原理/index.html">
 <meta property="og:site_name" content="KAMI">
-<meta property="og:description" content="ABS执行原理在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
+<meta property="og:description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-11T03:31:27.470Z">
+<meta property="og:updated_time" content="2019-07-25T08:27:33.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KAMI">
-<meta name="twitter:description" content="ABS执行原理在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
+<meta name="twitter:title" content="ABS执行原理">
+<meta name="twitter:description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -93,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt height="28">
+                <img src="/images/logo.svg" alt="ABS执行原理" height="28">
             
             </a>
         </div>
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 92 个字)
+                    几秒 读完 (大约 87 个字)
                 </span>
                 
                 
@@ -150,12 +150,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                
+                ABS执行原理
             
         </h1>
         <div class="content">
-            <hr>
-<h2 id="ABS执行原理"><a href="#ABS执行原理" class="headerlink" title="ABS执行原理"></a>ABS执行原理</h2><p>在多线程并发的时候吧，第一个线程拿到了锁，<br>其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋</p>
+            <p>在多线程并发的时候吧，第一个线程拿到了锁，<br>其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋</p>
 
         </div>
         
@@ -208,7 +207,7 @@
         <div class="level-start">
             <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/19/Spring-batch详解/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item"></span>
+                <span class="level-item">Spring-batch 详解</span>
             </a>
         </div>
         
@@ -388,14 +387,14 @@
             
             <a href="/2019/07/25/ActiveMQ/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -407,14 +406,14 @@
             
             <a href="/2019/07/19/Spring-batch详解/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -426,14 +425,14 @@
             
             <a href="/2019/07/11/AQS原理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -523,14 +522,14 @@
             
             <a href="/2019/07/25/ActiveMQ/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -542,14 +541,14 @@
             
             <a href="/2019/07/19/Spring-batch详解/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -561,14 +560,14 @@
             
             <a href="/2019/07/11/AQS原理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -648,11 +647,11 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt height="28">
+                    <img src="/images/logo.svg" alt="ABS执行原理" height="28">
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 &nbsp;
+                &copy; 2019 ABS执行原理&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

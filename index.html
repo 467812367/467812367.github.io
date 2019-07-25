@@ -138,7 +138,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 648 个字)
+                    4 分钟 读完 (大约 644 个字)
                 </span>
                 
                 
@@ -147,12 +147,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/25/ActiveMQ/"></a>
+                <a class="has-link-black-ter" href="/2019/07/25/ActiveMQ/">ActiveMQ 教程</a>
             
         </h1>
         <div class="content">
-            <hr>
-<h2 id="title-ActiveMQ-教程"><a href="#title-ActiveMQ-教程" class="headerlink" title="title:ActiveMQ 教程"></a>title:ActiveMQ 教程</h2><ul>
+            <ul>
 <li>AUTO_ACKNOWLEDGE = 1    自动确认</li>
 <li>CLIENT_ACKNOWLEDGE = 2    客户端手动确认</li>
 <li>DUPS_OK_ACKNOWLEDGE = 3    自动批量确认</li>
@@ -203,7 +202,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 162 个字)
+                    1 分钟 读完 (大约 158 个字)
                 </span>
                 
                 
@@ -212,12 +211,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/19/Spring-batch详解/"></a>
+                <a class="has-link-black-ter" href="/2019/07/19/Spring-batch详解/">Spring-batch 详解</a>
             
         </h1>
         <div class="content">
-            <hr>
-<h2 id="Spring-batch-详解"><a href="#Spring-batch-详解" class="headerlink" title="Spring-batch 详解"></a>Spring-batch 详解</h2><h3 id="各个表的含义"><a href="#各个表的含义" class="headerlink" title="各个表的含义"></a>各个表的含义</h3><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">batch_job_execution (执行任务详情，成功，失败，时间等)</span><br><span class="line">batch_job_execution_context ()</span><br><span class="line">batch_job_execution_params (执行任务的参数表)</span><br><span class="line">batch_job_execution_seq  (序列号)</span><br><span class="line">batch_job_instance (执行任务记录)</span><br><span class="line">batch_job_seq (序列号)</span><br><span class="line">batch_step_execution (步奏记录表)</span><br><span class="line">batch_step_execution_context</span><br><span class="line">batch_step_execution_seq (序列号)</span><br></pre></td></tr></table></figure>
+            <h3 id="各个表的含义"><a href="#各个表的含义" class="headerlink" title="各个表的含义"></a>各个表的含义</h3><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">batch_job_execution (执行任务详情，成功，失败，时间等)</span><br><span class="line">batch_job_execution_context ()</span><br><span class="line">batch_job_execution_params (执行任务的参数表)</span><br><span class="line">batch_job_execution_seq  (序列号)</span><br><span class="line">batch_job_instance (执行任务记录)</span><br><span class="line">batch_job_seq (序列号)</span><br><span class="line">batch_step_execution (步奏记录表)</span><br><span class="line">batch_step_execution_context</span><br><span class="line">batch_step_execution_seq (序列号)</span><br></pre></td></tr></table></figure>
 
 <h3 id="碰到的一些问题"><a href="#碰到的一些问题" class="headerlink" title="碰到的一些问题"></a>碰到的一些问题</h3><ul>
 <li><p>(A job instance already exists and is complete for parameters={run.id=1}.  If you want to run this job again, change the parameters.)</p>
@@ -251,7 +249,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 92 个字)
+                    几秒 读完 (大约 87 个字)
                 </span>
                 
                 
@@ -260,12 +258,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/11/AQS原理/"></a>
+                <a class="has-link-black-ter" href="/2019/07/11/AQS原理/">ABS执行原理</a>
             
         </h1>
         <div class="content">
-            <hr>
-<h2 id="ABS执行原理"><a href="#ABS执行原理" class="headerlink" title="ABS执行原理"></a>ABS执行原理</h2><p>在多线程并发的时候吧，第一个线程拿到了锁，<br>其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋</p>
+            <p>在多线程并发的时候吧，第一个线程拿到了锁，<br>其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋</p>
 
         </div>
         
@@ -498,14 +495,14 @@
             
             <a href="/2019/07/25/ActiveMQ/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -517,14 +514,14 @@
             
             <a href="/2019/07/19/Spring-batch详解/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -536,14 +533,14 @@
             
             <a href="/2019/07/11/AQS原理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -633,14 +630,14 @@
             
             <a href="/2019/07/25/ActiveMQ/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -652,14 +649,14 @@
             
             <a href="/2019/07/19/Spring-batch详解/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -671,14 +668,14 @@
             
             <a href="/2019/07/11/AQS原理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
