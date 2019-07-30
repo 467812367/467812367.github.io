@@ -7,18 +7,18 @@
 
 
 
-    <meta name="description" content="AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  queue 和 topic 区别qu">
+    <meta name="description" content="ActiveMQ的一些特性和参数 AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  Ac">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ActiveMQ 教程">
 <meta property="og:url" content="http://yoursite.com/2019/07/25/ActiveMQ/index.html">
 <meta property="og:site_name" content="KAMI">
-<meta property="og:description" content="AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  queue 和 topic 区别qu">
+<meta property="og:description" content="ActiveMQ的一些特性和参数 AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  Ac">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-25T08:26:46.013Z">
+<meta property="og:updated_time" content="2019-07-26T09:58:57.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ActiveMQ 教程">
-<meta name="twitter:description" content="AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  queue 和 topic 区别qu">
+<meta name="twitter:description" content="ActiveMQ的一些特性和参数 AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  Ac">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 644 个字)
+                    12 分钟 读完 (大约 1745 个字)
                 </span>
                 
                 
@@ -154,30 +154,76 @@
             
         </h1>
         <div class="content">
-            <ul>
+            <h2 id="ActiveMQ的一些特性和参数"><a href="#ActiveMQ的一些特性和参数" class="headerlink" title="ActiveMQ的一些特性和参数"></a>ActiveMQ的一些特性和参数</h2><ul>
 <li>AUTO_ACKNOWLEDGE = 1    自动确认</li>
 <li>CLIENT_ACKNOWLEDGE = 2    客户端手动确认</li>
 <li>DUPS_OK_ACKNOWLEDGE = 3    自动批量确认</li>
 <li>SESSION_TRANSACTED = 0    事务提交并确认</li>
 <li>INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有</li>
 </ul>
+<p><font color="red">ActiveMQ 到底是推还是拉？</font></p>
+<p>ActiveMQ默认是主动给consumer推送消息，默认到1000条consumer还未消费完就停止推送了。直到小于1000条，就会自动推送。</p>
+<p>如果想要让consumer主动去拉，得把prefetchSize设置为0（默认1000），之后才能主动去拉</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Destination destination = session.createQueue(<span class="hljs-string">"test-queue?consumer.prefetchSize=0"</span>);</span><br></pre></td></tr></table></figure>
+
 <h2 id="queue-和-topic-区别"><a href="#queue-和-topic-区别" class="headerlink" title="queue 和 topic 区别"></a>queue 和 topic 区别</h2><h3 id="queue的特性"><a href="#queue的特性" class="headerlink" title="queue的特性"></a>queue的特性</h3><ul>
-<li>消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息。<br>消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。<br>Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费、其它的则不能消费此消息了。<br>当消费者不存在时，消息会一直保存，直到有消费消费</li>
+<li><p>消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息。<br>消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。<br>Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费、其它的则不能消费此消息了。<br>当消费者不存在时，消息会一直保存，直到有消费消费</p>
+</li>
+<li><p>支持集群消费队列消息，开启多个消费者即可 </p>
+</li>
 </ul>
 <h3 id="topic的特性"><a href="#topic的特性" class="headerlink" title="topic的特性"></a>topic的特性</h3><ul>
 <li><p>消息生产者（发布）将消息发布到topic中，同时有多个消息消费者（订阅）消费该消息。<br>和点对点方式不同，发布到topic的消息会被所有订阅者消费。<br>当生产者发布消息，不管是否有消费者。都不会保存消息，意味着用户如果离线，消息再也不会被收到</p>
 </li>
 <li><p>只有创建durableSubscriber（持久化的订阅者）才会保存消息，用户离线了再上线，还是可以收到消息</p>
 </li>
+<li><p>不支持集群消费，开启多个消费者都能分别收到同样的消息，如何给每个消费者设置同一个ClientId的话，则只有一个能连上。</p>
+</li>
 </ul>
 <p><img src="https://i.loli.net/2019/07/25/5d39185a6d1a027767.png" alt="对比.png"></p>
 <h3 id="activemq的一些玩法"><a href="#activemq的一些玩法" class="headerlink" title="activemq的一些玩法"></a>activemq的一些玩法</h3><p>①  可以一次性往多个主题或者队列里发送数据</p>
 <p>生产者代码：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    connection = connectionFactory.createConnection();</span><br><span class="line">    connection.start();</span><br><span class="line"></span><br><span class="line">    Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">    Destination destination = session.createQueue(<span class="hljs-string">"test-queue,test-queue-foo,test-queue-bar,topic://test-topic-foo"</span>);</span><br><span class="line">    MessageProducer producer = session.createProducer(destination);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; NUM_MESSAGES_TO_SEND; i++) &#123;</span><br><span class="line">        TextMessage message = session.createTextMessage(<span class="hljs-string">"Message #"</span> + i);</span><br><span class="line">        System.out.println(<span class="hljs-string">"Sending message #"</span> + i);</span><br><span class="line">        producer.send(message);</span><br><span class="line">        Thread.sleep(DELAY);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ActiveMQConnectionFactory connectionFactory = <span class="hljs-keyword">new</span> 				ActiveMQConnectionFactory(<span class="hljs-string">"admin"</span>, <span class="hljs-string">"password"</span>, url);</span><br><span class="line">Connection connection = <span class="hljs-keyword">null</span>;</span><br><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    connection = connectionFactory.createConnection();</span><br><span class="line">    connection.start();</span><br><span class="line"></span><br><span class="line">    Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">    Destination destination = session.createQueue(<span class="hljs-string">"test-queue,test-queue-foo,test-queue-bar,topic://test-topic-foo"</span>);</span><br><span class="line">    MessageProducer producer = session.createProducer(destination);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; NUM_MESSAGES_TO_SEND; i++) &#123;</span><br><span class="line">        TextMessage message = session.createTextMessage(<span class="hljs-string">"Message #"</span> + i);</span><br><span class="line">        System.out.println(<span class="hljs-string">"Sending message #"</span> + i);</span><br><span class="line">        producer.send(message);</span><br><span class="line">        Thread.sleep(DELAY);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>消费者代码：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">            connection = connectionFactory.createConnection();</span><br><span class="line">            connection.start();</span><br><span class="line"></span><br><span class="line">            Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">            Destination destination = session.createQueue(<span class="hljs-string">"test-queue"</span>);</span><br><span class="line">            Destination destinationFoo = session.createQueue(<span class="hljs-string">"test-queue-foo"</span>);</span><br><span class="line">            Destination destinationBar = session.createQueue(<span class="hljs-string">"test-queue-bar"</span>);</span><br><span class="line">            Destination destinationTopicFoo = session.createTopic(<span class="hljs-string">"test-topic-foo"</span>);</span><br><span class="line"></span><br><span class="line">            MessageConsumer consumer = session.createConsumer(destination);</span><br><span class="line">            MessageConsumer consumerFoo = session.createConsumer(destinationFoo);</span><br><span class="line">            MessageConsumer consumerBar = session.createConsumer(destinationBar);</span><br><span class="line">            MessageConsumer consumerTopicFoo = session.createConsumer(destinationTopicFoo);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;</span><br><span class="line">                Message message = consumer.receive(TIMEOUT);</span><br><span class="line"></span><br><span class="line">                <span class="hljs-keyword">if</span> (message != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (message <span class="hljs-keyword">instanceof</span> TextMessage) &#123;</span><br><span class="line">                        String text = ((TextMessage) message).getText();</span><br><span class="line">                        System.out.println(<span class="hljs-string">"Got "</span> + i++ + <span class="hljs-string">". message on test-queue: "</span> + text);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                message = consumerFoo.receive(TIMEOUT);</span><br><span class="line"></span><br><span class="line">                <span class="hljs-keyword">if</span> (message != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (message <span class="hljs-keyword">instanceof</span> TextMessage) &#123;</span><br><span class="line">                        String text = ((TextMessage) message).getText();</span><br><span class="line">                        System.out.println(<span class="hljs-string">"Got "</span> + i++ + <span class="hljs-string">". message on test-queue-foo: "</span> + text);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                message = consumerBar.receive(TIMEOUT);</span><br><span class="line"></span><br><span class="line">                <span class="hljs-keyword">if</span> (message != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (message <span class="hljs-keyword">instanceof</span> TextMessage) &#123;</span><br><span class="line">                        String text = ((TextMessage) message).getText();</span><br><span class="line">                        System.out.println(<span class="hljs-string">"Got "</span> + i++ + <span class="hljs-string">". message on test-queue-bar: "</span> + text);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                message = consumerTopicFoo.receive(TIMEOUT);</span><br><span class="line"></span><br><span class="line">                <span class="hljs-keyword">if</span> (message != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (message <span class="hljs-keyword">instanceof</span> TextMessage) &#123;</span><br><span class="line">                        String text = ((TextMessage) message).getText();</span><br><span class="line">                        System.out.println(<span class="hljs-string">"Got "</span> + i++ + <span class="hljs-string">". message on test-topic-bar: "</span> + text);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
 
+<p>②创建一个持久性的订阅者</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    System.setProperty(<span class="hljs-string">"clientId"</span>,<span class="hljs-string">"jiangwz"</span>);</span><br><span class="line">    connection = connectionFactory.createConnection();</span><br><span class="line">    String clientId = System.getProperty(<span class="hljs-string">"clientId"</span>);</span><br><span class="line">    System.out.println(clientId);</span><br><span class="line">    connection.setClientID(clientId);</span><br><span class="line"></span><br><span class="line">    connection.start();</span><br><span class="line"></span><br><span class="line">    Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">    Topic destination = session.createTopic(<span class="hljs-string">"test-topic"</span>);</span><br><span class="line"></span><br><span class="line">    MessageConsumer consumer = session.createDurableSubscriber(destination, clientId) ;</span><br><span class="line">    consumer.setMessageListener(<span class="hljs-keyword">new</span> Subscriber(latch));</span><br><span class="line"></span><br><span class="line">    latch.await();</span><br><span class="line">    consumer.close();</span><br><span class="line">    session.close();</span><br><span class="line"></span><br><span class="line">&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"Caught exception!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>③队列排他消费</p>
+<p>默认情况下一个队列多个消费者会出现负载均衡的状况，如果你想只让一个消费者消费，其他消费者都消费不到消息，只要在队列后面加上<code>?consumer.exclusive=true</code>就可以了（只有第一个消费的人能够消费到，先来先消费），可以看如下代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    connection = connectionFactory.createConnection();</span><br><span class="line">    connection.start();</span><br><span class="line"></span><br><span class="line">    Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">    Queue destination = session.createQueue(<span class="hljs-string">"test-queue?consumer.exclusive=true"</span>);</span><br><span class="line">    MessageConsumer consumer = session.createConsumer(destination);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;</span><br><span class="line">        Message message = consumer.receive(TIMEOUT);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (message != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (message <span class="hljs-keyword">instanceof</span> TextMessage) &#123;</span><br><span class="line">                String text = ((TextMessage) message).getText();</span><br><span class="line">                System.out.println(<span class="hljs-string">"Got "</span> + i++ + <span class="hljs-string">". message: "</span> + text);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    consumer.close();</span><br><span class="line">    session.close();</span><br><span class="line"></span><br><span class="line">&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"Caught exception!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>④未读消息浏览功能（browser）</p>
+<p>只要消息未被读取（因为默认mq会把已读的消息删除掉），可以先去队列里面查看里面消息的内容</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    connection = connectionFactory.createConnection();</span><br><span class="line">    connection.start();</span><br><span class="line"></span><br><span class="line">    Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">    Queue destination = session.createQueue(<span class="hljs-string">"test-queue"</span>);</span><br><span class="line">    QueueBrowser browser = session.createBrowser(destination);</span><br><span class="line">    Enumeration enumeration = browser.getEnumeration();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (enumeration.hasMoreElements()) &#123;</span><br><span class="line">        TextMessage message = (TextMessage) enumeration.nextElement();</span><br><span class="line">        System.out.println(<span class="hljs-string">"Browsing: "</span> + message);</span><br><span class="line">        TimeUnit.MILLISECONDS.sleep(DELAY);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    session.close();</span><br><span class="line"></span><br><span class="line">&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"Caught exception!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>⑤消息选择器（messageSelector）</p>
+<p>发的时候可以加属性</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    connection = connectionFactory.createConnection();</span><br><span class="line">    connection.start();</span><br><span class="line"></span><br><span class="line">    Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">    Destination destination = session.createQueue(<span class="hljs-string">"test-queue"</span>);</span><br><span class="line">    MessageProducer producer = session.createProducer(destination);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; NUM_MESSAGES_TO_SEND; i++) &#123;</span><br><span class="line">        TextMessage message = session.createTextMessage(<span class="hljs-string">"Message #"</span> + i);</span><br><span class="line">        System.out.println(<span class="hljs-string">"Sending message #"</span> + i);</span><br><span class="line">        <span class="hljs-keyword">if</span> (i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"Sending to me"</span>);</span><br><span class="line">            message.setStringProperty(<span class="hljs-string">"intended"</span>, <span class="hljs-string">"me"</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"Sending to you"</span>);</span><br><span class="line">            message.setStringProperty(<span class="hljs-string">"intended"</span>, <span class="hljs-string">"you"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        producer.send(message);</span><br><span class="line">        Thread.sleep(DELAY);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    producer.close();</span><br><span class="line">    session.close();</span><br><span class="line"></span><br><span class="line">&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"Caught exception!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>消费的时候 可以指定 （intended = ‘you’）定向消费到you里面的消息（而不会消费到me里面的数据），不写messageSelector能消费到队列里所有数据</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    connection = connectionFactory.createConnection();</span><br><span class="line">    connection.start();</span><br><span class="line"></span><br><span class="line">    Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">    Destination destination = session.createQueue(<span class="hljs-string">"test-queue"</span>);</span><br><span class="line">    MessageConsumer consumer = session.createConsumer(destination, <span class="hljs-string">"intended = 'you'"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;</span><br><span class="line">        Message message = consumer.receive(TIMEOUT);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (message != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (message <span class="hljs-keyword">instanceof</span> TextMessage) &#123;</span><br><span class="line">                String text = ((TextMessage) message).getText();</span><br><span class="line">                System.out.println(<span class="hljs-string">"Got "</span> + i++ + <span class="hljs-string">". message: "</span> + text);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    consumer.close();</span><br><span class="line">    session.close();</span><br><span class="line"></span><br><span class="line">&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"Caught exception!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>⑥ 临时队列 （TemporaryQueue）<br>一般用于生产者给消费者发消息，需要消费者收到消息后，回一条消息时用到<br>生产者代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    connection = connectionFactory.createConnection();</span><br><span class="line">    connection.start();</span><br><span class="line"></span><br><span class="line">    Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">    Destination destination = session.createQueue(<span class="hljs-string">"test-queue"</span>);</span><br><span class="line">    MessageProducer producer = session.createProducer(destination);</span><br><span class="line">    Destination replyDest = session.createTemporaryQueue();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// set up the consumer to handle the reply</span></span><br><span class="line">    MessageConsumer replyConsumer = session.createConsumer(replyDest);</span><br><span class="line">    replyConsumer.setMessageListener(<span class="hljs-keyword">new</span> MessageListener() &#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMessage</span><span class="hljs-params">(Message message)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"*** REPLY *** "</span>);</span><br><span class="line">            System.out.println(message.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    TextMessage message = session.createTextMessage(<span class="hljs-string">"I need a response for this, please"</span>);</span><br><span class="line">    message.setJMSReplyTo(replyDest);</span><br><span class="line"></span><br><span class="line">    producer.send(message);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// wait for a response</span></span><br><span class="line">    TimeUnit.SECONDS.sleep(<span class="hljs-number">2</span>);</span><br><span class="line">    producer.close();</span><br><span class="line">    session.close();</span><br><span class="line"></span><br><span class="line">&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    System.out.println(<span class="hljs-string">"Caught exception!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>消费者代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        connection = connectionFactory.createConnection();</span><br><span class="line">        connection.start();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">final</span> Session session = connection.createSession(NON_TRANSACTED, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        Destination destination = session.createQueue(<span class="hljs-string">"test-queue"</span>);</span><br><span class="line">        MessageConsumer consumer = session.createConsumer(destination);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;</span><br><span class="line">            Message message = consumer.receive(TIMEOUT);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">if</span> (message != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (message <span class="hljs-keyword">instanceof</span> TextMessage) &#123;</span><br><span class="line">                    String text = ((TextMessage) message).getText();</span><br><span class="line">                    System.out.println(<span class="hljs-string">"Got "</span> + i++ + <span class="hljs-string">". message: "</span> + text);</span><br><span class="line">                    Destination replyTo = message.getJMSReplyTo();</span><br><span class="line">                    MessageProducer producer = session.createProducer(replyTo);</span><br><span class="line">                    producer.send(session.createTextMessage(<span class="hljs-string">"You made it to the consumer, here is your response"</span>));</span><br><span class="line">                    producer.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        consumer.close();</span><br><span class="line">        session.close();</span><br><span class="line"></span><br><span class="line">    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Caught exception!"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>⑦ 消费者有2中消费方法</p>
+<ol>
+<li><p>调用receive方法阻塞获取 </p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Message message = consumer.receive(TIMEOUT);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置一个监听器获取</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">consumer.setMessageListener(<span class="hljs-keyword">new</span> Subscriber(latch));</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>⑧ 可以用*号 匹配所有主题进行消费</p>
+<p>例如 /hello/*  可以匹配 /hello/1,/hello/2主题下面的所有消息</p>
 
         </div>
         
@@ -226,6 +272,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/26/Mqtt/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Mqtt协议讲解</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -282,7 +335,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        35
                     </p>
                 </div>
             </div>
@@ -401,16 +454,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/25/ActiveMQ/" class="media-left">
+            <a href="/2019/07/30/hexo+gitpages/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -420,16 +473,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/19/Spring-batch详解/" class="media-left">
+            <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -439,16 +492,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/11/AQS原理/" class="media-left">
+            <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -458,16 +511,35 @@
         
         <article class="media">
             
-            <a href="/2019/07/04/hello-world/" class="media-left">
+            <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-04T02:46:48.702Z">2019-07-04</time></div>
-                    <a href="/2019/07/04/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -493,7 +565,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">35</span>
                 </span>
             </a>
         </li>
@@ -536,16 +608,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/25/ActiveMQ/" class="media-left">
+            <a href="/2019/07/30/hexo+gitpages/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -555,16 +627,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/19/Spring-batch详解/" class="media-left">
+            <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -574,16 +646,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/11/AQS原理/" class="media-left">
+            <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -593,16 +665,35 @@
         
         <article class="media">
             
-            <a href="/2019/07/04/hello-world/" class="media-left">
+            <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-04T02:46:48.702Z">2019-07-04</time></div>
-                    <a href="/2019/07/04/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -628,7 +719,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">35</span>
                 </span>
             </a>
         </li>
