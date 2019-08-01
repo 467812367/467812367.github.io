@@ -2,22 +2,22 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>KAMI</title>
+<title>mysql事务 - KAMI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta name="description" content="事务的基本要素（ACID） 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一个不可分割的整体，就像化学中学过的原子，是物质构成的基本单位。  一致性（Consistency）：事务开始前和结束后，数据库的完整性约束没有被破坏 。比如A向B转账，不可能A扣了钱">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KAMI">
+<meta property="og:title" content="mysql事务">
 <meta property="og:url" content="http://yoursite.com/2019/07/30/MySql_trasaction/index.html">
 <meta property="og:site_name" content="KAMI">
 <meta property="og:description" content="事务的基本要素（ACID） 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一个不可分割的整体，就像化学中学过的原子，是物质构成的基本单位。  一致性（Consistency）：事务开始前和结束后，数据库的完整性约束没有被破坏 。比如A向B转账，不可能A扣了钱">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-03-04T01:26:09.168Z">
+<meta property="og:updated_time" content="2019-08-01T09:08:49.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KAMI">
+<meta name="twitter:title" content="mysql事务">
 <meta name="twitter:description" content="事务的基本要素（ACID） 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一个不可分割的整体，就像化学中学过的原子，是物质构成的基本单位。  一致性（Consistency）：事务开始前和结束后，数据库的完整性约束没有被破坏 。比如A向B转账，不可能A扣了钱">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
@@ -93,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt height="28">
+                <img src="/images/logo.svg" alt="mysql事务" height="28">
             
             </a>
         </div>
@@ -150,7 +150,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                
+                mysql事务
             
         </h1>
         <div class="content">
@@ -262,14 +262,14 @@
         <div class="level-start">
             <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/30/Redis_hot/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item"></span>
+                <span class="level-item">redis</span>
             </a>
         </div>
         
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/30/MySql_skill/">
-                <span class="level-item"></span>
+                <span class="level-item">mysql小技巧</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -461,14 +461,14 @@
             
             <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -480,14 +480,14 @@
             
             <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -499,14 +499,14 @@
             
             <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -518,14 +518,14 @@
             
             <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -615,14 +615,14 @@
             
             <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -634,14 +634,14 @@
             
             <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -653,14 +653,14 @@
             
             <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -672,14 +672,14 @@
             
             <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -740,11 +740,11 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt height="28">
+                    <img src="/images/logo.svg" alt="mysql事务" height="28">
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 &nbsp;
+                &copy; 2019 mysql事务&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

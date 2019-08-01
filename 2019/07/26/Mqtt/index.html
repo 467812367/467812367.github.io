@@ -15,7 +15,7 @@
 <meta property="og:description" content="MQTT 数据包结构1MqttPublishMessage[fixedHeader=MqttFixedHeader[messageType=PUBLISH, isDup=false, qosLevel=AT_MOST_ONCE, isRetain=false, remainingLength=8], variableHeader=MqttPublishVariableHeader[topicNam">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-26T09:17:23.655Z">
+<meta property="og:updated_time" content="2019-07-30T09:19:44.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mqtt协议讲解">
 <meta name="twitter:description" content="MQTT 数据包结构1MqttPublishMessage[fixedHeader=MqttFixedHeader[messageType=PUBLISH, isDup=false, qosLevel=AT_MOST_ONCE, isRetain=false, remainingLength=8], variableHeader=MqttPublishVariableHeader[topicNam">
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 594 个字)
+                    7 分钟 读完 (大约 1023 个字)
                 </span>
                 
                 
@@ -195,7 +195,53 @@ PINGRESP    13    服务器到客户端    PING应答
 DISCONNECT    14    客户端到服务器    中断连接
 Reserved    15    不可用    保留位
 
-第二个byte 消息的长度</code></pre>
+第二个byte 消息的长度</code></pre><h3 id="最终结构"><a href="#最终结构" class="headerlink" title="最终结构"></a>最终结构</h3><pre><code>    Description    7    6    5    4    3    2    1    0
+Fixed header/固定头部
+        Message Type(1)    DUP flag    QoS level    RETAIN
+byte 1
+    0    0    0    1    x    x    x    x
+byte 2    Remaining Length
+Variable header/可变头部
+Protocol Name
+byte 1    Length MSB (0)    0    0    0    0    0    0    0    0
+byte 2    Length LSB (6)    0    0    0    0    0    1    1    0
+byte 3    &apos;M&apos;    0    1    0    0    1    1    0    1
+byte 4    &apos;Q&apos;    0    1    0    1    0    0    0    1
+byte 5    &apos;I&apos;    0    1    0    0    1    0    0    1
+byte 6    &apos;s&apos;    0    1    1    1    0    0    1    1
+byte 7    &apos;d&apos;    0    1    1    0    0    1    0    0
+byte 8    &apos;p&apos;    0    1    1    1    0    0    0    0
+Protocol Version Number
+byte 9    Version (3)    0    0    0    0    0    0    1    1
+Connect Flags
+    User Name Flag    Password Flag    Will Retain    Will QoS    Will Flag    Clean Session    Reserved
+byte 10
+1    1    0    0    1    1    1    x
+Keep Alive timer
+byte 11    Keep Alive MSB (0)    0    0    0    0    0    0    0    0
+byte 12    Keep Alive LSB (10)    0    0    0    0    1    0    1    0
+Playload/消息体
+Client Identifier(客户端ID)
+
+1-23个字符长度，客户端到服务器的全局唯一标志，如果客户端ID超出23个字符长度，服务器需要返回码为2，标识符被拒绝响应的CONNACK消息。
+处理QoS级别1和2的消息ID中，可以使用到。
+必填项。
+Will Topic
+
+Will Flag值为1，这里便是Will Topic的内容。QoS级别通过Will QoS字段定义，RETAIN值通过Will RETAIN标识，都定义在可变头里面。
+Will Message
+
+Will Flag若设为1，这里便是Will Message定义消息的内容，对应的主题为Will Topic。如果客户端意外的断开触发服务器PUBLISH此消息。
+长度有可能为0。
+在CONNECT消息中的Will Message是UTF-8编码的，当被服务器发布时则作为二进制的消息体。
+User Name
+
+如果设置User Name标识，可以在此读取用户名称。一般可用于身份验证。协议建议用户名为不多于12个字符，不是必须。
+Password
+
+如果设置Password标识，便可读取用户密码。建议密码为12个字符或者更少，但不是必须。</code></pre><p><img src="https://i.loli.net/2019/07/30/5d400a870c9c251324.png" alt="QQ截图20190730171411.png"></p>
+<p><img src="https://i.loli.net/2019/07/30/5d400ac89c49395126.png" alt="QQ截图20190730171540.png"></p>
+
         </div>
         
         
@@ -247,7 +293,7 @@ Reserved    15    不可用    保留位
         <div class="level-start">
             <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/30/MySQL/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item"></span>
+                <span class="level-item">mysql</span>
             </a>
         </div>
         
@@ -446,14 +492,14 @@ Reserved    15    不可用    保留位
             
             <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -465,14 +511,14 @@ Reserved    15    不可用    保留位
             
             <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -484,14 +530,14 @@ Reserved    15    不可用    保留位
             
             <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -503,14 +549,14 @@ Reserved    15    不可用    保留位
             
             <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -600,14 +646,14 @@ Reserved    15    不可用    保留位
             
             <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -619,14 +665,14 @@ Reserved    15    不可用    保留位
             
             <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -638,14 +684,14 @@ Reserved    15    不可用    保留位
             
             <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -657,14 +703,14 @@ Reserved    15    不可用    保留位
             
             <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>

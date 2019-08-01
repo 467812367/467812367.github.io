@@ -138,7 +138,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 125 个字)
+                    1 分钟 读完 (大约 136 个字)
                 </span>
                 
                 
@@ -172,14 +172,14 @@
 </ol>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd hexo_blog</span><br></pre></td></tr></table></figure>
 
-<p>5 .  安装 </p>
+<p>  5 . 安装 </p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
 <li><p>启动hexo 服务 (访问localhost:4000 成功则ok)</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>修改配置文件 （_config.yma）<br>deploy:<br>type: git<br>repo: <a href="https://github.com/467812367/467812367.github.io.git" target="_blank" rel="noopener">https://github.com/467812367/467812367.github.io.git</a><br>branch: master</p>
+<li><p>修改配置文件 （_config.yml）  Theme目录下面<br>deploy:<br>type: git<br>repo: <a href="https://github.com/467812367/467812367.github.io.git" target="_blank" rel="noopener">https://github.com/467812367/467812367.github.io.git</a><br>branch: master</p>
 </li>
 <li><p>安装部署插件</p>
 </li>
@@ -191,10 +191,11 @@
 </ol>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 
-<p>  (部署)        </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+<ol start="10">
+<li>先清除，后部署  (清除部署)（要输入账户密码）    </li>
+</ol>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
 
-<p> (清除部署)（要输入账户密码）</p>
 
         </div>
         
@@ -222,7 +223,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    17 分钟 读完 (大约 2484 个字)
+                    16 分钟 读完 (大约 2436 个字)
                 </span>
                 
                 
@@ -231,12 +232,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/30/一些设计上的基本常识 - 梁飞/"></a>
+                <a class="has-link-black-ter" href="/2019/07/30/一些设计上的基本常识 - 梁飞/">基本常识 （转）</a>
             
         </h1>
         <div class="content">
-            <p>最近给团队新人讲了一些设计上的常识，可能会对其它的新人也有些帮助， 把暂时想到的几条，先记在这里。</p>
-<h3 id="API与SPI分离"><a href="#API与SPI分离" class="headerlink" title="API与SPI分离"></a>API与SPI分离</h3><p>框架或组件通常有两类客户，一个是使用者，一个是扩展者，<br>API(Application Programming Interface)是给使用者用的，<br>而SPI(Service Provide Interface)是给扩展者用的，<br>在设计时，尽量把它们隔离开，而不要混在一起，<br>也就是说，使用者是看不到扩展者写的实现的，<br>比如：一个Web框架，它有一个API接口叫Action， 里面有个execute()方法，是给使用者用来写业务逻辑的，<br>然后，Web框架有一个SPI接口给扩展者控制输出方式， 比如用velocity模板输出还是用json输出等，<br>如果这个Web框架使用一个都继承Action的VelocityAction和一个JsonAction做为扩展方式，<br>要用velocity模板输出的就继承VelocityAction，要用json输出的就继承JsonAction，<br>这就是API和SPI没有分离的反面例子，SPI接口混在了API接口中，<br>合理的方式是，有一个单独的Renderer接口，有VelocityRenderer和JsonRenderer实现，<br>Web框架将Action的输出转交给Renderer接口做渲染输出。 </p>
+            <h3 id="API与SPI分离"><a href="#API与SPI分离" class="headerlink" title="API与SPI分离"></a>API与SPI分离</h3><p>框架或组件通常有两类客户，一个是使用者，一个是扩展者，<br>API(Application Programming Interface)是给使用者用的，<br>而SPI(Service Provide Interface)是给扩展者用的，<br>在设计时，尽量把它们隔离开，而不要混在一起，<br>也就是说，使用者是看不到扩展者写的实现的，<br>比如：一个Web框架，它有一个API接口叫Action， 里面有个execute()方法，是给使用者用来写业务逻辑的，<br>然后，Web框架有一个SPI接口给扩展者控制输出方式， 比如用velocity模板输出还是用json输出等，<br>如果这个Web框架使用一个都继承Action的VelocityAction和一个JsonAction做为扩展方式，<br>要用velocity模板输出的就继承VelocityAction，要用json输出的就继承JsonAction，<br>这就是API和SPI没有分离的反面例子，SPI接口混在了API接口中，<br>合理的方式是，有一个单独的Renderer接口，有VelocityRenderer和JsonRenderer实现，<br>Web框架将Action的输出转交给Renderer接口做渲染输出。 </p>
 <h3 id="服务域-实体域-会话域分离"><a href="#服务域-实体域-会话域分离" class="headerlink" title="服务域/实体域/会话域分离"></a>服务域/实体域/会话域分离</h3><p>任何框架或组件，总会有核心领域模型，比如： Spring的Bean，Struts的Action，Dubbo的Service，Napoli的Queue等等<br>这个核心领域模型及其组成部分称为实体域，它代表着我们要操作的目标本身，<br>实体域通常是线程安全的，不管是通过不变类，同步状态，或复制的方式，<br>服务域也就是行为域，它是组件的功能集，同时也负责实体域和会话域的生命周期管理，<br>比如Spring的ApplicationContext，Dubbo的ServiceManager等， 服务域的对象通常会比较重，<br>而且是线程安全的，并以单一实例服务于所有调用， 什么是会话？就是一次交互过程，<br>会话中重要的概念是上下文，什么是上下文？ 比如我们说：“老地方见”，这里的“老地方”就是上下文信息，<br>为什么说“老地方”对方会知道，因为我们前面定义了“老地方”的具体内容， 所以说，上下文通常持有交互过程中的状态变量等，<br>会话对象通常较轻，每次请求都重新创建实例，请求结束后销毁。<br>简而言之： 把元信息交由实体域持有， 把一次请求中的临时状态由会话域持有， 由服务域贯穿整个过程。 </p>
 <h3 id="在重要的过程上设置拦截接口"><a href="#在重要的过程上设置拦截接口" class="headerlink" title="在重要的过程上设置拦截接口"></a>在重要的过程上设置拦截接口</h3><p>如果你要写个远程调用框架，那远程调用的过程应该有一个统一的拦截接口，<br>如果你要写一个ORM框架，那至少SQL的执行过程，Mapping过程要有拦截接口，<br>如果你要写一个Web框架，那请求的执行过程应该要有拦截接口， 等等，<br>没有哪个公用的框架可以Cover住所有需求，允许外置行为，是框架的基本扩展方式， 这样，<br>如果有人想在远程调用前，验证下令牌，验证下黑白名单，统计下日志，<br>如果有人想在SQL执行前加下分页包装，做下数据权限控制，统计下SQL执行时间，<br>如果有人想在请求执行前检查下角色，包装下输入输出流，统计下请求量， 等等，<br>就可以自行完成，而不用侵入框架内部， 拦截接口，通常是把过程本身用一个对象封装起来，传给拦截器链，<br>比如：远程调用主过程为invoke()，那拦截器接口通常为invoke(Invocation)，<br>Invocation对象封装了本来要执行过程的上下文，并且Invocation里有一个invoke()方法，<br>由拦截器决定什么时候执行，同时，Invocation也代表拦截器行为本身，<br>这样上一拦截器的Invocation其实是包装的下一拦截器的过程，<br>直到最后一个拦截器的Invocation是包装的最终的invoke()过程，<br>同理，SQL主过程为execute()，那拦截器接口通常为execute(Execution)，原理一样， 当然，实现方式可以任意，上面只是举例。 </p>
 <h3 id="重要的状态的变更发送事件并留出监听接口"><a href="#重要的状态的变更发送事件并留出监听接口" class="headerlink" title="重要的状态的变更发送事件并留出监听接口"></a>重要的状态的变更发送事件并留出监听接口</h3><p>这里先要讲一个事件和上面拦截器的区别，拦截器是干预过程的，它是过程的一部分，<br>是基于过程行为的， 而事件是基于状态数据的，任何行为改变的相同状态，对事件应该是一致的，<br>事件通常是事后通知，是一个Callback接口，方法名通常是过去式的，比如onChanged()，<br>比如远程调用框架，当网络断开或连上应该发出一个事件，当出现错误也可以考虑发出一个事件，<br>这样外围应用就有可能观察到框架内部的变化，做相应适应。 </p>
@@ -281,7 +281,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/30/为什么我们做分布式使用Redis/"></a>
+                <a class="has-link-black-ter" href="/2019/07/30/为什么我们做分布式使用Redis/">为什么使用 Redis</a>
             
         </h1>
         <div class="content">
@@ -430,7 +430,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/30/Zookeeper/"></a>
+                <a class="has-link-black-ter" href="/2019/07/30/Zookeeper/">Zookeeper</a>
             
         </h1>
         <div class="content">
@@ -471,7 +471,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/30/Dubbo知识精华-续/"></a>
+                <a class="has-link-black-ter" href="/2019/07/30/Dubbo知识精华-续/">Dubbo知识精华-2</a>
             
         </h1>
         <div class="content">
@@ -586,7 +586,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/30/Dubbo知识精华/"></a>
+                <a class="has-link-black-ter" href="/2019/07/30/Dubbo知识精华/">Dubbo知识精华</a>
             
         </h1>
         <div class="content">
@@ -699,7 +699,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/30/Dubbo/"></a>
+                <a class="has-link-black-ter" href="/2019/07/30/Dubbo/">Dubbo</a>
             
         </h1>
         <div class="content">
@@ -781,7 +781,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/30/知识图谱/"></a>
+                <a class="has-link-black-ter" href="/2019/07/30/知识图谱/">知识图谱</a>
             
         </h1>
         <div class="content">
@@ -835,7 +835,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/30/Tomcat最佳实践/"></a>
+                <a class="has-link-black-ter" href="/2019/07/30/Tomcat最佳实践/">Tomcat实践</a>
             
         </h1>
         <div class="content">
@@ -1122,14 +1122,14 @@
             
             <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1141,14 +1141,14 @@
             
             <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1160,14 +1160,14 @@
             
             <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1179,14 +1179,14 @@
             
             <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1276,14 +1276,14 @@
             
             <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1295,14 +1295,14 @@
             
             <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1314,14 +1314,14 @@
             
             <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1333,14 +1333,14 @@
             
             <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>

@@ -15,7 +15,7 @@
 <meta property="og:description" content="ActiveMQ的一些特性和参数 AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  Ac">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-26T09:58:57.677Z">
+<meta property="og:updated_time" content="2019-07-30T08:18:46.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ActiveMQ 教程">
 <meta name="twitter:description" content="ActiveMQ的一些特性和参数 AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  Ac">
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分钟 读完 (大约 1745 个字)
+                    13 分钟 读完 (大约 1925 个字)
                 </span>
                 
                 
@@ -224,6 +224,26 @@
 </ol>
 <p>⑧ 可以用*号 匹配所有主题进行消费</p>
 <p>例如 /hello/*  可以匹配 /hello/1,/hello/2主题下面的所有消息</p>
+<h2 id="控制台密码修改"><a href="#控制台密码修改" class="headerlink" title="控制台密码修改"></a>控制台密码修改</h2><ul>
+<li>先查看jetty.xml文件里面验证有没有开启, authenticate = true 开启</li>
+</ul>
+<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=<span class="hljs-string">"securityConstraint"</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"org.eclipse.jetty.util.security.Constraint"</span>&gt;</span><br><span class="line">        &lt;property name=<span class="hljs-string">"name"</span> value=<span class="hljs-string">"BASIC"</span> /&gt;</span><br><span class="line">        &lt;property name=<span class="hljs-string">"roles"</span> value=<span class="hljs-string">"user,admin"</span> /&gt;</span><br><span class="line">        &lt;!-- set authenticate=<span class="hljs-keyword">false</span> to disable login --&gt;</span><br><span class="line">        &lt;property name=<span class="hljs-string">"authenticate"</span> value=<span class="hljs-string">"true"</span> /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>去conf/jetty-realm.properties 里面修改用户 分别是   账户：密码，角色</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--- Defines users that can access the web (console, demo, etc.)</span><br><span class="line">--- username: password [,rolename ...]</span><br><span class="line">root: root, admin</span><br><span class="line">user: user, user</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改连接密码"><a href="#修改连接密码" class="headerlink" title="修改连接密码"></a>修改连接密码</h2><p>在 activeMQ的 activemq.xml里面的broker标签里面加入以下配置</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 添加访问ActiveMQ的账号密码 --&gt;</span><br><span class="line">		&lt;plugins&gt;</span><br><span class="line">			&lt;simpleAuthenticationPlugin&gt;</span><br><span class="line">				&lt;users&gt;</span><br><span class="line">					&lt;authenticationUser username=&quot;admin&quot; password=&quot;admin&quot; groups=&quot;users,admins&quot;/&gt;</span><br><span class="line">				&lt;/users&gt;</span><br><span class="line">			&lt;/simpleAuthenticationPlugin&gt;</span><br><span class="line">		&lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
+
+<font color="red">
+修改连接密码后，可能导致控制台访问异常，例如查看队列里面的消息出问题，这时一定要修改credentials.properties文件里面的账户和上面配置的密码一致
+</font>
+
+<p><code>activemq.username=admin
+activemq.password=admin
+guest.password=password</code></p>
 
         </div>
         
@@ -475,14 +495,14 @@
             
             <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -494,14 +514,14 @@
             
             <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -513,14 +533,14 @@
             
             <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -532,14 +552,14 @@
             
             <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -629,14 +649,14 @@
             
             <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -648,14 +668,14 @@
             
             <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -667,14 +687,14 @@
             
             <a href="/2019/07/30/Zookeeper/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -686,14 +706,14 @@
             
             <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
