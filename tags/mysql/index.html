@@ -2,14 +2,14 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>KAMI</title>
+<title>标签: mysql - KAMI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="KAMI">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/mysql/index.html">
 <meta property="og:site_name" content="KAMI">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
@@ -125,149 +125,16 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-30T06:23:19.583Z">2019-07-30</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    21 分钟 读完 (大约 3136 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/30/Redis_hot/">redis</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="1）Redis为什么使用单进程单线程方式也这么快"><a href="#1）Redis为什么使用单进程单线程方式也这么快" class="headerlink" title="1）Redis为什么使用单进程单线程方式也这么快"></a>1）Redis为什么使用单进程单线程方式也这么快</h3><p>Redis采用的是基于内存的采用的是单进程单线程模型的KV数据库，由C语言编写。官方提供的数据是可以达到100000+的qps。这个数据不比采用单进程多线程的同样基于内存的KV数据库Memcached差。</p>
-<p>Redis快的主要原因是：</p>
-<ol>
-<li>完全基于内存</li>
-<li>数据结构简单，对数据操作也简单</li>
-<li>使用多路 I/O 复用模型</li>
-</ol>
-<p>多路 I/O 复用模型是利用select、poll、epoll可以同时监察多个流的 I/O 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有I/O事件时，就从阻塞态中唤醒，于是程序就会轮询一遍所有的流（epoll是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流，这种做法就避免了大量的无用操作。这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络IO的时间消耗），且Redis在内存中操作数据的速度非常快（内存内的操作不会成为这里的性能瓶颈），主要以上两点造就了Redis具有很高的吞吐量。</p>
-<p>和Memcached不同，Redis并没有直接使用Libevent，而是自己完成了一个非常轻量级的对select、epoll、evport、kqueue这些通用的接口的实现。在不同的系统调用选用适合的接口，linux下默认是epoll。因为Libevent比较重更通用代码量也就很庞大，拥有很多Redis用不上的功能，Redis为了追求“轻巧”并且去除依赖，就选择自己去封装了一套。</p>
-<h4 id="单进程单线程好处"><a href="#单进程单线程好处" class="headerlink" title="单进程单线程好处"></a>单进程单线程好处</h4><ul>
-<li>代码更清晰，处理逻辑更简单</li>
-<li>不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗</li>
-<li>不存在多进程或者多线程导致的切换而消耗CPU</li>
-</ul>
-<h4 id="单进程单线程弊端"><a href="#单进程单线程弊端" class="headerlink" title="单进程单线程弊端"></a>单进程单线程弊端</h4><p>无法发挥多核CPU性能，不过可以通过在单机开多个Redis实例来完善；</p>
-<h4 id="其他一些优秀的开源软件采用的模型"><a href="#其他一些优秀的开源软件采用的模型" class="headerlink" title="其他一些优秀的开源软件采用的模型"></a>其他一些优秀的开源软件采用的模型</h4><ul>
-<li>多进程单线程模型：Nginx</li>
-<li>单进程多线程模型：Memcached</li>
-</ul>
-<h3 id="2）五种类型数据类型"><a href="#2）五种类型数据类型" class="headerlink" title="2）五种类型数据类型"></a>2）五种类型数据类型</h3><p>字符串、列表、散列表，集合、有序集合</p>
-<h3 id="3）内存中数据持久化"><a href="#3）内存中数据持久化" class="headerlink" title="3）内存中数据持久化"></a>3）内存中数据持久化</h3><p>使用复制来扩展读性能：复制到多台服务器、提高读性能和可用性</p>
-<p>使用分区来扩展写性能【hash一致性算法】：当数据量大的时候,把数据分散存入多个数据库中,减少单节点的连接压力</p>
-<p>特点</p>
-<ul>
-<li>完全基于内存</li>
-<li>数据结构简单，对数据操作也简单</li>
-<li>使用多路 I/O 复用模型</li>
-</ul>
-<h3 id="4）Redis-适用场景"><a href="#4）Redis-适用场景" class="headerlink" title="4）Redis 适用场景"></a>4）Redis 适用场景</h3><ol>
-<li>缓存 将热点数据放到内存中</li>
-<li>消息队列 List 类型是双向链表，很适合用于消息队列</li>
-<li>计数器 快速、频繁读写操作；string的单线性自增减 ++ –</li>
-<li>共同好友关系 set 交集运算，很容易就可以知道用户的共同好友</li>
-<li>排名 zset有序集合</li>
-</ol>
-<h3 id="5）持久化"><a href="#5）持久化" class="headerlink" title="5）持久化"></a>5）持久化</h3><p>快照持久化</p>
-<p>将某个时间点的所有数据都存放到硬盘上</p>
-<p>可以将快照复制到其它服务器从而创建具有相同数据的服务器副本</p>
-<p>缺点：故障可能丢失最后一次创建快照之后的数据；如果数据量很大，保存快照的时间也会很长。</p>
-<p>AOF 持久化 将写命令添加到 AOF 文件（Append Only File）的末尾</p>
-<ul>
-<li>always： 每个写命令都同步，严重减低服务器的性能；</li>
-<li>everysec ：每秒同步一次，比较合适，保证系统奔溃时只会丢失一秒左右的数据，并且 Redis 每秒执行一次同步对服务器性能几乎没有任何影响；</li>
-<li>no ：让操作系统来决定何时同步，不能给性能带来提升，且会增加奔溃时数据丢失量</li>
-</ul>
-<p>随着服务器写请求的增多，AOF 文件会越来越大；Redis 提供了一种将 AOF 重写的特性，能够去除 AOF 文件中的冗余写命令。</p>
-<p>对硬盘的文件进行写入时，写入的内容首先会被存储到缓冲区，操作系统决定何时写</p>
-<p>用户可以调用 file.flush() 方法请求尽快将缓冲区存储的数据同步到硬盘</p>
-<p>redis主从复制 分布式数据同步方式</p>
-<p>slaveof host port 命令来让一个服务器成为另一个服务器的从服务器。</p>
-<p>一个从服务器只能有一个主服务器</p>
-<p>从服务器连接主服务器的过程</p>
-<ul>
-<li>主服务器创建快照文件，发送给从服务器。同时记录其间执行的写命令，发送完毕后，开始向从服务器发送写命令；</li>
-<li>从服务器丢弃所有旧数据，载入主服务器的快照文件，然后开始接受主服务器发来的写命令；</li>
-<li>主服务器每执行一次写命令，就向从服务器发送相同的写命令</li>
-</ul>
-<p>主从链 创建一个中间层来分担主服务器的复制工作</p>
-<ul>
-<li>随着负载不断上升，主服务器可能无法很快地更新所有从服务器</li>
-<li>重新连接和重新同步从服务器将导致系统超载</li>
-<li>中间层的服务器是最上层服务器的从服务器，又是最下层服务器的主服务器</li>
-</ul>
-<h3 id="6）redis-主服务器-故障-处理"><a href="#6）redis-主服务器-故障-处理" class="headerlink" title="6）redis 主服务器 故障 处理"></a>6）redis 主服务器 故障 处理</h3><p>当主服务器出现故障时，Redis 常用的做法是新开一台服务器作为主服务器，具体步骤如下：假设 A 为主服务器，B 为从服务器，当 A 出现故障时，让 B 生成一个快照文件，将快照文件发送给 C，并让 C 恢复快照文件的数据。最后，让 B 成为 C 的从服务器。</p>
-<h3 id="7）分片-集群-读并发"><a href="#7）分片-集群-读并发" class="headerlink" title="7）分片 集群 读并发"></a>7）分片 集群 读并发</h3><p>数据划分为多个部分，可以将数据存储到多台机器里，作用：负载均衡、线性级别的性能提升</p>
-<h3 id="8）分片方式："><a href="#8）分片方式：" class="headerlink" title="8）分片方式："></a>8）分片方式：</h3><p>客户端代码分片</p>
-<ul>
-<li>Redis Sharding，对Redis数据的key进行hash，相同的key到相同的节点上</li>
-<li>一致性哈希算法</li>
-<li>代理服务器分片 轮询round-bin</li>
-</ul>
-<h3 id="9）redis与数据库的同步-数据一致"><a href="#9）redis与数据库的同步-数据一致" class="headerlink" title="9）redis与数据库的同步 数据一致"></a>9）redis与数据库的同步 数据一致</h3><ul>
-<li><p>一致性要求高场景，实时同步方案，即查询redis，若查询不到再从DB查询，保存到redis；</p>
-</li>
-<li><p>更新redis时，先更新数据库，再将redis内容设置为过期(建议不要去更新缓存内容，直接设置缓存过期)，再用ZINCRBY增量修正redis数据</p>
-</li>
-<li><p>并发程度高的，采用异步队列的方式，采用kafka等消息中间件处理消息生产和消费</p>
-</li>
-<li><p>阿里的同步工具canal，实现方式是模拟mysql slave和master的同步机制，监控DB bitlog的日志更新来触发redis的更新，解放程序员双手，减少工作量</p>
-</li>
-<li><p>利用mysql触发器的API进行编程,c/c++语言实现，学习成本高。</p>
-</li>
-</ul>
-<h3 id="10）热数据与Mysql的同步编码实现-数据库上锁"><a href="#10）热数据与Mysql的同步编码实现-数据库上锁" class="headerlink" title="10）热数据与Mysql的同步编码实现 数据库上锁"></a>10）热数据与Mysql的同步编码实现 数据库上锁</h3><p>热点数据（经常会被查询，但是不经常被修改或者删除的数据），首选是使用redis缓存</p>
-<p>用spring的AOP来构建redis缓存的自动生产和清除，过程如下：</p>
-<ul>
-<li>Select 数据库前查询redis，有的话使用redis数据，放弃select 数据库，没有的话，select 数据库，然后将数据插入redis</li>
-<li>update或者delete 数据库数据<ul>
-<li>高并发的情况下：先对数据库加锁，再删除redis</li>
-<li>查询redis是否存在该数据，若存在则先对数据库加行锁，再删除redis，再update或者delete数据库中数据</li>
-</ul>
-</li>
-<li>update或者delete redis，先更新数据库，再将redis内容设置为过期(建议不要去更新缓存内容，直接设置缓存过期)</li>
-</ul>
-<p>出错场景：update先删掉了redis中的该数据，这时另一个线程执行查询，发现redis中没有，瞬间执行了查询SQL，并且插入到redis</p>
-<h3 id="11）缓存穿透，缓存击穿，缓存雪崩解决方案分析"><a href="#11）缓存穿透，缓存击穿，缓存雪崩解决方案分析" class="headerlink" title="11）缓存穿透，缓存击穿，缓存雪崩解决方案分析"></a>11）缓存穿透，缓存击穿，缓存雪崩解决方案分析</h3><h4 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h4><p>缓存穿透是指查询一个一定不存在的数据，由于缓存是不命中时被动写的，并且出于容错考虑，如果从存储层查不到数据则不写入缓存，这将导致这个不存在的数据每次请求都要到存储层去查询，失去了缓存的意义。在流量大时，可能DB就挂掉了，要是有人利用不存在的key频繁攻击我们的应用，这就是漏洞。</p>
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>有很多种方法可以有效地解决缓存穿透问题，最常见的则是采用布隆过滤器，将所有可能存在的数据哈希到一个足够大的bitmap中，一个一定不存在的数据会被 这个bitmap拦截掉，从而避免了对底层存储系统的查询压力。另外也有一个更为简单粗暴的方法（我们采用的就是这种），如果一个查询返回的数据为空（不管是数 据不存在，还是系统故障），我们仍然把这个空结果进行缓存，但它的过期时间会很短，最长不超过五分钟。</p>
-<h4 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h4><p>缓存雪崩是指在我们设置缓存时采用了相同的过期时间，导致缓存在某一时刻同时失效，请求全部转发到DB，DB瞬时压力过重雪崩。</p>
-<h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>缓存失效时的雪崩效应对底层系统的冲击非常可怕。大多数系统设计者考虑用加锁或者队列的方式保证缓存的单线 程（进程）写，从而避免失效时大量的并发请求落到底层存储系统上。这里分享一个简单方案就时讲缓存失效时间分散开，比如我们可以在原有的失效时间基础上增加一个随机值，比如1-5分钟随机，这样每一个缓存的过期时间的重复率就会降低，就很难引发集体失效的事件。</p>
-<h4 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h4><p>对于一些设置了过期时间的key，如果这些key可能会在某些时间点被超高并发地访问，是一种非常“热点”的数据。这个时候，需要考虑一个问题：缓存被“击穿”的问题，这个和缓存雪崩的区别在于这里针对某一key缓存，前者则是很多key。</p>
-<p>缓存在某个时间点过期的时候，恰好在这个时间点对这个Key有大量的并发请求过来，这些请求发现缓存过期一般都会从后端DB加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把后端DB压垮。</p>
-<h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><p>我们的目标是：尽量少的线程构建缓存(甚至是一个) + 数据一致性 + 较少的潜在危险</p>
-<p><a href="https://www.cnblogs.com/raichen/p/7750165.html" target="_blank" rel="noopener">https://www.cnblogs.com/raichen/p/7750165.html</a></p>
-
-        </div>
-        
-        
-        
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">mysql</a></li>
+        </ul>
+        </nav>
     </div>
 </div>
-
-
-
-
-
-
-
 
     <div class="card">
     
@@ -886,156 +753,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-26T07:11:38.859Z">2019-07-26</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1023 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/26/Mqtt/">Mqtt协议讲解</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="MQTT-数据包结构"><a href="#MQTT-数据包结构" class="headerlink" title="MQTT 数据包结构"></a>MQTT 数据包结构</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MqttPublishMessage[fixedHeader=MqttFixedHeader[messageType=PUBLISH, isDup=<span class="hljs-keyword">false</span>, qosLevel=AT_MOST_ONCE, isRetain=<span class="hljs-keyword">false</span>, remainingLength=<span class="hljs-number">8</span>], variableHeader=MqttPublishVariableHeader[topicName=test, packetId=-<span class="hljs-number">1</span>], payload=PooledSlicedByteBuf(ridx: <span class="hljs-number">0</span>, widx: <span class="hljs-number">2</span>, cap: <span class="hljs-number">2</span>/<span class="hljs-number">2</span>, unwrapped: PooledUnsafeDirectByteBuf(ridx: <span class="hljs-number">10</span>, widx: <span class="hljs-number">10</span>, cap: <span class="hljs-number">1024</span>))]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>固定头（Fixed header），存在于所有MQTT数据包中，表示数据包类型及数据包的分组类标识</li>
-<li>可变头（Variable header），存在于部分MQTT数据包中，数据包类型决定了可变头是否存在及其具体内容</li>
-<li>消息体（Payload），存在于部分MQTT数据包中，表示客户端收到的具体内容</li>
-</ul>
-<h3 id="固定头"><a href="#固定头" class="headerlink" title="固定头"></a>固定头</h3><pre><code>由2个byte组成   1个byte=8bit （这里要理清楚哪边是高位） 
-例如16 =  0001 0000 bit0-3 = 0000 retain = 0, qos = 00, dup = 0 ）
-第一个byte 分为8bit  bit0-bit3表示
-
-bit0 = retain(发布保留标识，表示服务器要保留这次推送的信息，如果有新的订阅者出现，就把这消息推送给它，如果设有那么推送至当前订阅者后释放。)
-
-bit1-2 = qos 
-发布消息的服务质量，即：保证消息传递的次数
-00：最多一次，即：&lt;=1
-01：至少一次，即：&gt;=1
-10：一次，即：=1
-11：预留
-
-bit3 = dup (发布消息的副本。用来在保证消息的可靠传输，如果设置为 1，则在下面的变长中增加MessageId，并且需要回复确认，以保证消息传输完成，但不能用于检测消息重复发送。)
-
-bit4-7 消息类型  （例如16 =  0001 0000 bit4-7 = 0001 = 1 = CONNECT ）
-名称    值    流方向    描述
-Reserved    0    不可用    保留位
-CONNECT    1    客户端到服务器    客户端请求连接到服务器
-CONNACK    2    服务器到客户端    连接确认
-PUBLISH    3    双向    发布消息
-PUBACK    4    双向    发布确认
-PUBREC    5    双向    发布收到（保证第1部分到达）
-PUBREL    6    双赂    发布释放（保证第2部分到达）
-PUBCOMP    7    双向    发布完成（保证第3部分到达）
-SUBSCRIBE    8    客户端到服务器    客户端请求订阅
-SUBACK    9    服务器到客户端    订阅确认
-UNSUBSCRIBE    10    客户端到服务器    请求取消订阅
-UNSUBACK    11    服务器到客户端    取消订阅确认
-PINGREQ    12    客户端到服务器    PING请求
-PINGRESP    13    服务器到客户端    PING应答
-DISCONNECT    14    客户端到服务器    中断连接
-Reserved    15    不可用    保留位
-
-第二个byte 消息的长度</code></pre><h3 id="最终结构"><a href="#最终结构" class="headerlink" title="最终结构"></a>最终结构</h3><pre><code>    Description    7    6    5    4    3    2    1    0
-Fixed header/固定头部
-        Message Type(1)    DUP flag    QoS level    RETAIN
-byte 1
-    0    0    0    1    x    x    x    x
-byte 2    Remaining Length
-Variable header/可变头部
-Protocol Name
-byte 1    Length MSB (0)    0    0    0    0    0    0    0    0
-byte 2    Length LSB (6)    0    0    0    0    0    1    1    0
-byte 3    &apos;M&apos;    0    1    0    0    1    1    0    1
-byte 4    &apos;Q&apos;    0    1    0    1    0    0    0    1
-byte 5    &apos;I&apos;    0    1    0    0    1    0    0    1
-byte 6    &apos;s&apos;    0    1    1    1    0    0    1    1
-byte 7    &apos;d&apos;    0    1    1    0    0    1    0    0
-byte 8    &apos;p&apos;    0    1    1    1    0    0    0    0
-Protocol Version Number
-byte 9    Version (3)    0    0    0    0    0    0    1    1
-Connect Flags
-    User Name Flag    Password Flag    Will Retain    Will QoS    Will Flag    Clean Session    Reserved
-byte 10
-1    1    0    0    1    1    1    x
-Keep Alive timer
-byte 11    Keep Alive MSB (0)    0    0    0    0    0    0    0    0
-byte 12    Keep Alive LSB (10)    0    0    0    0    1    0    1    0
-Playload/消息体
-Client Identifier(客户端ID)
-
-1-23个字符长度，客户端到服务器的全局唯一标志，如果客户端ID超出23个字符长度，服务器需要返回码为2，标识符被拒绝响应的CONNACK消息。
-处理QoS级别1和2的消息ID中，可以使用到。
-必填项。
-Will Topic
-
-Will Flag值为1，这里便是Will Topic的内容。QoS级别通过Will QoS字段定义，RETAIN值通过Will RETAIN标识，都定义在可变头里面。
-Will Message
-
-Will Flag若设为1，这里便是Will Message定义消息的内容，对应的主题为Will Topic。如果客户端意外的断开触发服务器PUBLISH此消息。
-长度有可能为0。
-在CONNECT消息中的Will Message是UTF-8编码的，当被服务器发布时则作为二进制的消息体。
-User Name
-
-如果设置User Name标识，可以在此读取用户名称。一般可用于身份验证。协议建议用户名为不多于12个字符，不是必须。
-Password
-
-如果设置Password标识，便可读取用户密码。建议密码为12个字符或者更少，但不是必须。</code></pre><p><img src="https://i.loli.net/2019/07/30/5d400a870c9c251324.png" alt="QQ截图20190730171411.png"></p>
-<p><img src="https://i.loli.net/2019/07/30/5d400ac89c49395126.png" alt="QQ截图20190730171540.png"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/page/2/">上一页</a>
-        </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/4/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
-            
-            <li><a class="pagination-link is-current" href="/page/3/">3</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
-            
-        </ul>
-    </nav>
-</div>
 </div>
                 
 

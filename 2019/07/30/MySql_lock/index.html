@@ -8,6 +8,7 @@
 
 
     <meta name="description" content="数据库锁概述相对其他数据库而言，MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。比如，MyISAM和MEMORY存储引擎采用的是表级锁（table-level locking）；InnoDB存储引擎既支持行级锁（ row-level locking），也支持表级锁，但默认情况下是采用行级锁。 MySQL主要的两种锁的特性可大致归纳如下:  表级锁： 开销小，加锁快；不会">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql锁">
 <meta property="og:url" content="http://yoursite.com/2019/07/30/MySql_lock/index.html">
@@ -15,7 +16,7 @@
 <meta property="og:description" content="数据库锁概述相对其他数据库而言，MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。比如，MyISAM和MEMORY存储引擎采用的是表级锁（table-level locking）；InnoDB存储引擎既支持行级锁（ row-level locking），也支持表级锁，但默认情况下是采用行级锁。 MySQL主要的两种锁的特性可大致归纳如下:  表级锁： 开销小，加锁快；不会">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-01T09:08:26.058Z">
+<meta property="og:updated_time" content="2019-08-01T09:32:17.474Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql锁">
 <meta name="twitter:description" content="数据库锁概述相对其他数据库而言，MySQL的锁机制比较简单，其最显著的特点是不同的存储引擎支持不同的锁机制。比如，MyISAM和MEMORY存储引擎采用的是表级锁（table-level locking）；InnoDB存储引擎既支持行级锁（ row-level locking），也支持表级锁，但默认情况下是采用行级锁。 MySQL主要的两种锁的特性可大致归纳如下:  表级锁： 开销小，加锁快；不会">
@@ -105,11 +106,11 @@
                 
                 <a class="navbar-item" href="/archives">文章</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item" href="/categories">分类</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item" href="/tags">标签</a>
                 
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item" href="/about">关于</a>
                 
             </div>
             
@@ -136,6 +137,10 @@
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:23:19.568Z">2019-07-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/mysql/">mysql</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
@@ -203,6 +208,15 @@
 
         </div>
         
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/mysql/">mysql</a>
+                </div>
+            </div>
+        </div>
+        
         
         
     </div>
@@ -216,28 +230,23 @@
         <div class="buttons is-centered">
             
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="https://i.loli.net/2019/08/01/5d42b41fbb08d31663.png" alt="支付宝"></div>
+</a>
 
                 
                 
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
-
-<div class="notification is-danger">
-    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                
-<div class="notification is-danger">
-    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
-</div>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="https://i.loli.net/2019/08/01/5d42b4b9cf4fa34692.png" alt="微信"></div>
+</a>
 
                 
         </div>
@@ -311,7 +320,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        35
+                        34
                     </p>
                 </div>
             </div>
@@ -321,7 +330,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        0
+                        4
                     </p>
                 </div>
             </div>
@@ -331,7 +340,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        0
+                        4
                     </p>
                 </div>
             </div>
@@ -365,41 +374,6 @@
     
         
 
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            链接
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">Hexo</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">PPOffice</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
     
         
@@ -410,13 +384,54 @@
                 分类
             </h3>
             <ul class="menu-list">
-            
+            <li>
+        <a class="level is-marginless" href="/categories/MQ/">
+            <span class="level-start">
+                <span class="level-item">MQ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/dubbo/">
+            <span class="level-start">
+                <span class="level-item">dubbo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux/">
+            <span class="level-start">
+                <span class="level-item">linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mysql/">
+            <span class="level-start">
+                <span class="level-item">mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li>
             </ul>
         </div>
     </div>
 </div>
     
         
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/dubbo/" style="font-size: 13.33px;">dubbo</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/消息中间件/" style="font-size: 10px;">消息中间件</a>
+    </div>
+</div>
+
     
     
         <div class="column-right-shadow is-hidden-widescreen ">
@@ -517,7 +532,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
                     <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/dubbo/">dubbo</a>
                     </p>
                 </div>
             </div>
@@ -541,7 +556,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">35</span>
+                    <span class="level-item tag">34</span>
                 </span>
             </a>
         </li>
@@ -558,6 +573,34 @@
                 标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息中间件/">
+                        <span class="tag">消息中间件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
             </div>
         </div>
@@ -671,7 +714,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
                     <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/dubbo/">dubbo</a>
                     </p>
                 </div>
             </div>
@@ -695,7 +738,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">35</span>
+                    <span class="level-item tag">34</span>
                 </span>
             </a>
         </li>
@@ -712,6 +755,34 @@
                 标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息中间件/">
+                        <span class="tag">消息中间件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
             </div>
         </div>

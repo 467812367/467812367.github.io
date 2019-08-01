@@ -101,11 +101,11 @@
                 
                 <a class="navbar-item" href="/archives">文章</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item" href="/categories">分类</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item" href="/tags">标签</a>
                 
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item" href="/about">关于</a>
                 
             </div>
             
@@ -126,67 +126,6 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.115Z">2019-07-30</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 550 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/30/Nginx进阶配置/">mysql进阶</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="静态文件服务器"><a href="#静态文件服务器" class="headerlink" title="静态文件服务器"></a>静态文件服务器</h3><p>在Java开发过程以及生产环境中，最常用的web应用服务器当属Tomcat，尽管这只猫也能够处理一些静态请求，例如图片、html、样式文件等，但是效率并不是那么尽人意。所以在生产环境中，我们一般使用Nginx代理服务器来处理静态文件，来提升网站性能。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen  80;</span><br><span class="line">        server_name  file.52itstyle.com;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        #root 指令用来指定文件在服务器上的基路径</span><br><span class="line">        root /data/statics;</span><br><span class="line">        #location指令用来映射请求到本地文件系统</span><br><span class="line">        location / &#123;</span><br><span class="line">           autoindex on; # 索引</span><br><span class="line">           autoindex_exact_size on; # 显示文件大小</span><br><span class="line">           autoindex_localtime on; # 显示文件时间</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>Nginx 提供轮询（round robin）、IP 哈希（client IP）和加权轮询 3 种方式，默认情况下，Nginx 采用的是轮询。</p>
-<h4 id="轮询（默认）"><a href="#轮询（默认）" class="headerlink" title="轮询（默认）"></a>轮询（默认）</h4><p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">server 192.168.1.14; </span><br><span class="line">server 192.168.1.15; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="加权轮询"><a href="#加权轮询" class="headerlink" title="加权轮询"></a>加权轮询</h4><p>指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">server 192.168.1.14 weight=1; </span><br><span class="line">server 192.168.1.15 weight=2; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="ip-hash"><a href="#ip-hash" class="headerlink" title="ip_hash"></a>ip_hash</h4><p>每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">ip_hash; </span><br><span class="line">server 192.168.0.14; </span><br><span class="line">server 192.168.0.15; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="重试策略"><a href="#重试策略" class="headerlink" title="重试策略"></a>重试策略</h4><p>可以为每个 backserver 指定最大的重试次数，和重试时间间隔,所使用的关键字是 max_fails 和 fail_timeout。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">server 192.168.1.14  weight=1  max_fails=2 fail_timeout=30s; </span><br><span class="line">server 192.168.1.15  weight=2  max_fails=2 fail_timeout=30s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>失败重试次数为3，且超时时间为30秒。</p>
-<h4 id="热机策略"><a href="#热机策略" class="headerlink" title="热机策略"></a>热机策略</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">server 192.168.1.14  weight=1  max_fails=2 fail_timeout=30s; </span><br><span class="line">server 192.168.1.15  weight=2  max_fails=2 fail_timeout=30s;</span><br><span class="line"></span><br><span class="line">server 192.168.1.16 backup;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当所有的非备机（non-backup）都宕机（down）或者繁忙（busy）的时候，就会使用由 backup 标注的备机。必须要注意的是，backup 不能和 ip_hash 关键字一起使用。</p>
-<h3 id="WebSocket配置实例"><a href="#WebSocket配置实例" class="headerlink" title="WebSocket配置实例"></a>WebSocket配置实例</h3><p><a href="https://blog.52itstyle.com/archives/736/" target="_blank" rel="noopener">Nginx学习之反向代理WebSocket配置实例 </a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
     <div class="card">
     
     <div class="card-content article ">
@@ -237,6 +176,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.110Z">2019-07-30</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/linux/">linux</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -284,6 +227,10 @@
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.108Z">2019-07-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/linux/">linux</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
@@ -339,6 +286,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.105Z">2019-07-30</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/linux/">linux</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -383,6 +334,10 @@
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.084Z">2019-07-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/linux/">linux</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
@@ -429,6 +384,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.082Z">2019-07-30</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/linux/">linux</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -473,6 +432,10 @@
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.080Z">2019-07-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/linux/">linux</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
@@ -523,6 +486,10 @@
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.077Z">2019-07-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/linux/">linux</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
@@ -619,6 +586,107 @@
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-30T06:23:36.073Z">2019-07-30</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 分钟 读完 (大约 1489 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/30/AB压力测试工具/">ABS压力测试</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install httpd-tools</span><br></pre></td></tr></table></figure>
+
+<h4 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab -V</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;</span><br><span class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</span><br><span class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</span><br></pre></td></tr></table></figure>
+
+<h4 id="ab参数说明"><a href="#ab参数说明" class="headerlink" title="ab参数说明"></a>ab参数说明</h4><p>有关ab命令的使用，我们可以通过帮助命令进行查看。如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab --help</span><br></pre></td></tr></table></figure>
+
+<p>下面我们对这些参数，进行相关说明。如下：</p>
+<p>-n在测试会话中所执行的请求个数。默认时，仅执行一个请求。</p>
+<p>-c一次产生的请求个数。默认是一次一个。</p>
+<p>-t测试所进行的最大秒数。其内部隐含值是-n 50000，它可以使对服务器的测试限制在一个固定的总时间以内。默认时，没有时间限制。</p>
+<p>-p包含了需要POST的数据的文件。</p>
+<p>-P对一个中转代理提供BASIC认证信任。用户名和密码由一个:隔开，并以base64编码形式发送。无论服务器是否需要(即, 是否发送了401认证需求代码)，此字符串都会被发送。</p>
+<p>-T POST数据所使用的Content-type头信息。</p>
+<p>-v设置显示信息的详细程度-4或更大值会显示头信息，3或更大值可以显示响应代码(404,200等),2或更大值可以显示警告和其他信息。</p>
+<p>-V显示版本号并退出。</p>
+<p>-w以HTML表的格式输出结果。默认时，它是白色背景的两列宽度的一张表。</p>
+<p>-i执行HEAD请求，而不是GET。</p>
+<p>-x设置<table>属性的字符串。</table></p>
+<p>-X对请求使用代理服务器。</p>
+<p>-y设置<tr>属性的字符串。</tr></p>
+<p>-C对请求附加一个Cookie:行。其典型形式是name=value的一个参数对，此参数可以重复。</p>
+<p>-H对请求附加额外的头信息。此参数的典型形式是一个有效的头信息行，其中包含了以冒号分隔的字段和值的对(如,”Accept-Encoding:zip/zop;8bit”)。</p>
+<p>-A对服务器提供BASIC认证信任。用户名和密码由一个:隔开，并以base64编码形式发送。无论服务器是否需要(即,是否发送了401认证需求代码)，此字符串都会被发送。</p>
+<p>-h显示使用方法。</p>
+<p>-d不显示”percentage served within XX [ms] table”的消息(为以前的版本提供支持)。</p>
+<p>-e产生一个以逗号分隔的(CSV)文件，其中包含了处理每个相应百分比的请求所需要(从1%到100%)的相应百分比的(以微妙为单位)时间。由于这种格式已经“二进制化”，所以比’gnuplot’格式更有用。</p>
+<p>-g把所有测试结果写入一个’gnuplot’或者TSV(以Tab分隔的)文件。此文件可以方便地导入到Gnuplot,IDL,Mathematica,Igor甚至Excel中。其中的第一行为标题。</p>
+<p>-i执行HEAD请求，而不是GET。</p>
+<p>-k启用HTTP KeepAlive功能，即在一个HTTP会话中执行多个请求。默认时，不启用KeepAlive功能。</p>
+<p>-q如果处理的请求数大于150，ab每处理大约10%或者100个请求时，会在stderr输出一个进度计数。此-q标记可以抑制这些信息。</p>
+<h4 id="ab性能指标"><a href="#ab性能指标" class="headerlink" title="ab性能指标"></a>ab性能指标</h4><p>在进行性能测试过程中有几个指标比较重要：</p>
+<p>1、吞吐率（Requests per second）</p>
+<p>服务器并发处理能力的量化描述，单位是reqs/s，指的是在某个并发用户数下单位时间内处理的请求数。某个并发用户数下单位时间内能处理的最大请求数，称之为最大吞吐率。</p>
+<p>记住：吞吐率是基于并发用户数的。这句话代表了两个含义：</p>
+<p>a、吞吐率和并发用户数相关</p>
+<p>b、不同的并发用户数下，吞吐率一般是不同的</p>
+<p>计算公式：总请求数/处理完成这些请求数所花费的时间，即</p>
+<p>Request per second=Complete requests/Time taken for tests</p>
+<p>必须要说明的是，这个数值表示当前机器的整体性能，值越大越好。</p>
+<p>2、并发连接数（The number of concurrent connections）</p>
+<p>并发连接数指的是某个时刻服务器所接受的请求数目，简单的讲，就是一个会话。</p>
+<p>3、并发用户数（Concurrency Level）</p>
+<p>要注意区分这个概念和并发连接数之间的区别，一个用户可能同时会产生多个会话，也即连接数。在HTTP/1.1下，IE7支持两个并发连接，IE8支持6个并发连接，FireFox3支持4个并发连接，所以相应的，我们的并发用户数就得除以这个基数。</p>
+<p>4、用户平均请求等待时间（Time per request）</p>
+<p>计算公式：处理完成所有请求数所花费的时间/（总请求数/并发用户数），即：</p>
+<p>Time per request=Time taken for tests/（Complete requests/Concurrency Level）</p>
+<p>5、服务器平均请求等待时间（Time per request:across all concurrent requests）</p>
+<p>计算公式：处理完成所有请求数所花费的时间/总请求数，即：</p>
+<p>Time taken for/testsComplete requests</p>
+<p>可以看到，它是吞吐率的倒数。</p>
+<p>同时，它也等于用户平均请求等待时间/并发用户数，即</p>
+<p>Time per request/Concurrency Level</p>
+<h4 id="ab实际使用"><a href="#ab实际使用" class="headerlink" title="ab实际使用"></a>ab实际使用</h4><p>ab的命令参数比较多，我们经常使用的是-c和-n参数。</p>
+<p>ab -c 10 -n 100 <a href="http://www.xxx.com/index.php" target="_blank" rel="noopener">http://www.xxx.com/index.php</a></p>
+<p>-c10表示并发用户数为10</p>
+<p>-n100表示请求总数为100</p>
+<p><a href="http://www.xxx.com/index.php表示请求的目标URL" target="_blank" rel="noopener">http://www.xxx.com/index.php表示请求的目标URL</a></p>
+<p>这行表示同时处理100个请求并运行10次index.php文件。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -685,7 +753,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        35
+                        34
                     </p>
                 </div>
             </div>
@@ -695,7 +763,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        0
+                        4
                     </p>
                 </div>
             </div>
@@ -705,7 +773,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        0
+                        4
                     </p>
                 </div>
             </div>
@@ -739,41 +807,6 @@
     
         
 
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            链接
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">Hexo</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">PPOffice</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
     
         
@@ -784,13 +817,54 @@
                 分类
             </h3>
             <ul class="menu-list">
-            
+            <li>
+        <a class="level is-marginless" href="/categories/MQ/">
+            <span class="level-start">
+                <span class="level-item">MQ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/dubbo/">
+            <span class="level-start">
+                <span class="level-item">dubbo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/linux/">
+            <span class="level-start">
+                <span class="level-item">linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mysql/">
+            <span class="level-start">
+                <span class="level-item">mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li>
             </ul>
         </div>
     </div>
 </div>
     
         
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/dubbo/" style="font-size: 13.33px;">dubbo</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/消息中间件/" style="font-size: 10px;">消息中间件</a>
+    </div>
+</div>
+
     
     
         <div class="column-right-shadow is-hidden-widescreen ">
@@ -891,7 +965,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
                     <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/dubbo/">dubbo</a>
                     </p>
                 </div>
             </div>
@@ -915,7 +989,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">35</span>
+                    <span class="level-item tag">34</span>
                 </span>
             </a>
         </li>
@@ -932,6 +1006,34 @@
                 标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息中间件/">
+                        <span class="tag">消息中间件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
             </div>
         </div>
@@ -1045,7 +1147,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
                     <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/dubbo/">dubbo</a>
                     </p>
                 </div>
             </div>
@@ -1069,7 +1171,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">35</span>
+                    <span class="level-item tag">34</span>
                 </span>
             </a>
         </li>
@@ -1086,6 +1188,34 @@
                 标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dubbo/">
+                        <span class="tag">dubbo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息中间件/">
+                        <span class="tag">消息中间件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
             </div>
         </div>
