@@ -7,18 +7,19 @@
 
 
 
-    <meta name="description" content="首先安装 nodejs npm -version 出现版本，则安装成功  安装 hexo-cli  1npm install -g hexo-cli   创建目录  1mkdir hexo_blog   初始化hexo  1hexo init hexo_blog   进入目录  1cd hexo_blog    5 . 安装  1npm install   启动hexo 服务 (访问localho">
+    <meta name="description" content="首先安装 nodejs npm -version 出现版本，则安装成功  安装 hexo-cli  1npm install -g hexo-cli   创建目录  1mkdir hexo_blog   初始化hexo  1hexo init hexo_blog   进入目录  1cd hexo_blog  5 . 安装  1npm install   启动hexo 服务 (访问localhost">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo+Gitpages 搭建流程">
 <meta property="og:url" content="http://yoursite.com/2019/07/30/hexo+gitpages/index.html">
 <meta property="og:site_name" content="KAMI">
-<meta property="og:description" content="首先安装 nodejs npm -version 出现版本，则安装成功  安装 hexo-cli  1npm install -g hexo-cli   创建目录  1mkdir hexo_blog   初始化hexo  1hexo init hexo_blog   进入目录  1cd hexo_blog    5 . 安装  1npm install   启动hexo 服务 (访问localho">
+<meta property="og:description" content="首先安装 nodejs npm -version 出现版本，则安装成功  安装 hexo-cli  1npm install -g hexo-cli   创建目录  1mkdir hexo_blog   初始化hexo  1hexo init hexo_blog   进入目录  1cd hexo_blog  5 . 安装  1npm install   启动hexo 服务 (访问localhost">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-01T08:20:02.336Z">
+<meta property="og:updated_time" content="2019-08-01T09:51:31.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+Gitpages 搭建流程">
-<meta name="twitter:description" content="首先安装 nodejs npm -version 出现版本，则安装成功  安装 hexo-cli  1npm install -g hexo-cli   创建目录  1mkdir hexo_blog   初始化hexo  1hexo init hexo_blog   进入目录  1cd hexo_blog    5 . 安装  1npm install   启动hexo 服务 (访问localho">
+<meta name="twitter:description" content="首先安装 nodejs npm -version 出现版本，则安装成功  安装 hexo-cli  1npm install -g hexo-cli   创建目录  1mkdir hexo_blog   初始化hexo  1hexo init hexo_blog   进入目录  1cd hexo_blog  5 . 安装  1npm install   启动hexo 服务 (访问localhost">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -137,6 +138,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -175,17 +180,17 @@
 </ol>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd hexo_blog</span><br></pre></td></tr></table></figure>
 
-<p>  5 . 安装 </p>
+<p>5 . 安装 </p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
 <ol start="6">
-<li><p>启动hexo 服务 (访问localhost:4000 成功则ok)</p>
+<li>启动hexo 服务 (访问localhost:4000 成功则ok)</li>
+</ol>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置文件 （_config.yml）  Theme目录下面<br>deploy:<br>type: git<br>repo: <a href="https://github.com/467812367/467812367.github.io.git" target="_blank" rel="noopener">https://github.com/467812367/467812367.github.io.git</a><br>branch: master</p>
-</li>
-<li><p>安装部署插件</p>
-</li>
+
+<ol start="7">
+<li>修改配置文件 （_config.yml）  Theme目录下面<br>deploy:<br>type: git<br>repo: <a href="https://github.com/467812367/467812367.github.io.git" target="_blank" rel="noopener">https://github.com/467812367/467812367.github.io.git</a><br>branch: master</li>
+<li>安装部署插件</li>
 </ol>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git</span><br></pre></td></tr></table></figure>
 
@@ -200,6 +205,15 @@
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
 
 
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/hexo/">hexo</a>
+                </div>
+            </div>
         </div>
         
         
@@ -245,8 +259,8 @@
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/30/一些设计上的基本常识 - 梁飞/">
-                <span class="level-item">基本常识 （转）</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/26/Mqtt/">
+                <span class="level-item">Mqtt协议讲解</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -298,7 +312,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        34
+                        6
                     </p>
                 </div>
             </div>
@@ -308,7 +322,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        2
                     </p>
                 </div>
             </div>
@@ -318,7 +332,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        2
                     </p>
                 </div>
             </div>
@@ -371,28 +385,12 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/dubbo/">
+        <a class="level is-marginless" href="/categories/hexo/">
             <span class="level-start">
-                <span class="level-item">dubbo</span>
+                <span class="level-item">hexo</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/linux/">
-            <span class="level-start">
-                <span class="level-item">linux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">7</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/mysql/">
-            <span class="level-start">
-                <span class="level-item">mysql</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li>
             </ul>
@@ -406,7 +404,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/dubbo/" style="font-size: 13.33px;">dubbo</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/消息中间件/" style="font-size: 10px;">消息中间件</a>
+        <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 10px;">消息中间件</a>
     </div>
 </div>
 
@@ -434,7 +432,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
                     <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
                     </p>
                 </div>
             </div>
@@ -442,16 +440,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
+            <a href="/2019/07/26/Mqtt/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mqtt协议讲解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-26T07:11:38.859Z">2019-07-26</time></div>
+                    <a href="/2019/07/26/Mqtt/" class="has-link-black-ter is-size-6">Mqtt协议讲解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -461,16 +459,35 @@
         
         <article class="media">
             
-            <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
+            <a href="/2019/07/25/ActiveMQ/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
+                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/19/Spring-batch详解/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
+                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -480,37 +497,18 @@
         
         <article class="media">
             
-            <a href="/2019/07/30/Zookeeper/" class="media-left">
+            <a href="/2019/07/11/AQS原理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
+                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
                     <p class="is-size-7 is-uppercase">
                         
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/dubbo/">dubbo</a>
                     </p>
                 </div>
             </div>
@@ -534,7 +532,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">34</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -553,23 +551,9 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/dubbo/">
-                        <span class="tag">dubbo</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linux/">
-                        <span class="tag">linux</span>
-                        <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mysql/">
-                        <span class="tag">mysql</span>
-                        <span class="tag is-grey">8</span>
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -616,7 +600,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
                     <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
                     </p>
                 </div>
             </div>
@@ -624,16 +608,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="media-left">
+            <a href="/2019/07/26/Mqtt/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基本常识 （转）">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mqtt协议讲解">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.225Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/一些设计上的基本常识 - 梁飞/" class="has-link-black-ter is-size-6">基本常识 （转）</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-26T07:11:38.859Z">2019-07-26</time></div>
+                    <a href="/2019/07/26/Mqtt/" class="has-link-black-ter is-size-6">Mqtt协议讲解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -643,16 +627,35 @@
         
         <article class="media">
             
-            <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="media-left">
+            <a href="/2019/07/25/ActiveMQ/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="为什么使用 Redis">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.206Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/为什么我们做分布式使用Redis/" class="has-link-black-ter is-size-6">为什么使用 Redis</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
+                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/19/Spring-batch详解/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
+                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -662,37 +665,18 @@
         
         <article class="media">
             
-            <a href="/2019/07/30/Zookeeper/" class="media-left">
+            <a href="/2019/07/11/AQS原理/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Zookeeper">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.205Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Zookeeper/" class="has-link-black-ter is-size-6">Zookeeper</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
+                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
                     <p class="is-size-7 is-uppercase">
                         
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/30/Dubbo知识精华-续/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Dubbo知识精华-2">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:23:54.202Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/Dubbo知识精华-续/" class="has-link-black-ter is-size-6">Dubbo知识精华-2</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/dubbo/">dubbo</a>
                     </p>
                 </div>
             </div>
@@ -716,7 +700,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">34</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -735,23 +719,9 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/dubbo/">
-                        <span class="tag">dubbo</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linux/">
-                        <span class="tag">linux</span>
-                        <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mysql/">
-                        <span class="tag">mysql</span>
-                        <span class="tag is-grey">8</span>
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
