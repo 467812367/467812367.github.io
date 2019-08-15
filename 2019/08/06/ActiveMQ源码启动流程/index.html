@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>归档: 2019/7 - KAMI</title>
+<title>ActiveMQ源码启动 - KAMI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="KAMI">
-<meta property="og:url" content="http://yoursite.com/archives/2019/07/index.html">
+    <meta name="description" content="ActiveMQ的版本为 5.15.9 activemq编译流程 下载源码，然后导入idea里面  进入项目目录执行mvn clean install -Dmaven.test.skip=true 编译，编译可能会出问题，可以按照提示排除，一般问题都能解决，可能会出现有某一个模块怎么编译都有问题，那就先把这个模块去掉 编译通过后，进入activemq-console模块的Main方法下启动项目，但">
+<meta name="keywords" content="消息中间件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ActiveMQ源码启动">
+<meta property="og:url" content="http://yoursite.com/2019/08/06/ActiveMQ源码启动流程/index.html">
 <meta property="og:site_name" content="KAMI">
+<meta property="og:description" content="ActiveMQ的版本为 5.15.9 activemq编译流程 下载源码，然后导入idea里面  进入项目目录执行mvn clean install -Dmaven.test.skip=true 编译，编译可能会出问题，可以按照提示排除，一般问题都能解决，可能会出现有某一个模块怎么编译都有问题，那就先把这个模块去掉 编译通过后，进入activemq-console模块的Main方法下启动项目，但">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-08-15T02:17:55.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KAMI">
+<meta name="twitter:title" content="ActiveMQ源码启动">
+<meta name="twitter:description" content="ActiveMQ的版本为 5.15.9 activemq编译流程 下载源码，然后导入idea里面  进入项目目录执行mvn clean install -Dmaven.test.skip=true 编译，编译可能会出问题，可以按照提示排除，一般问题都能解决，可能会出现有某一个模块怎么编译都有问题，那就先把这个模块去掉 编译通过后，进入activemq-console模块的Main方法下启动项目，但">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -89,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="KAMI" height="28">
+                <img src="/images/logo.svg" alt="ActiveMQ源码启动" height="28">
             
             </a>
         </div>
@@ -125,114 +130,132 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        七月 2019
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-06T01:30:31.391Z">2019-08-06</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time>
-                        <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-26T07:11:38.859Z">2019-07-26</time>
-                        <a href="/2019/07/26/Mqtt/" class="has-link-black-ter is-size-6">Mqtt协议讲解</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time>
-                        <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 451 个字)
+                </span>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time>
-                        <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time>
-                        <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-04T02:46:48.702Z">2019-07-04</time>
-                        <a href="/2019/07/04/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                ActiveMQ源码启动
+            
+        </h1>
+        <div class="content">
+            <p>ActiveMQ的版本为 5.15.9</p>
+<h2 id="activemq编译流程"><a href="#activemq编译流程" class="headerlink" title="activemq编译流程"></a>activemq编译流程</h2><ol>
+<li>下载源码，然后导入idea里面  进入项目目录执行<code>mvn clean install -Dmaven.test.skip=true</code> 编译，编译可能会出问题，可以按照提示排除，一般问题都能解决，可能会出现有某一个模块怎么编译都有问题，那就先把这个模块去掉</li>
+<li>编译通过后，进入activemq-console模块的Main方法下启动项目，但是启动前先做一些配置，</li>
+</ol>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(<span class="hljs-string">"activemq.base"</span>,        <span class="hljs-string">"D:\\ideaworkspace\\activemq-parent-5.15.9-source-release\\activemq-parent-5.15.9\\temp"</span>);</span><br><span class="line">System.setProperty(<span class="hljs-string">"activemq.home"</span>,        <span class="hljs-string">"D:\\ideaworkspace\\activemq-parent-5.15.9-source-release\\activemq-parent-5.15.9\\temp"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>把以上代码加入项目中，然后在项目中新建一个temp目录，把 <code>D:\ideaworkspace\activemq-parent-5.15.9-source-release\activemq-parent-5.15.9\assembly\target</code> 目录下的 activemq.bin.zip解压放入temp下，注解temp目录下必须是bin，conf等目录</p>
+<ol start="3">
+<li>启动Main方法 加入参数 <code>start broker:(tcp://localhost:61616,tcp://localhost:5000)?useJmx=true</code> 即可启动</li>
+</ol>
+<h2 id="activemq源码启动流程"><a href="#activemq源码启动流程" class="headerlink" title="activemq源码启动流程"></a>activemq源码启动流程</h2><ol>
+<li>进入根目录  <code>mvn clean install -DskipTests</code> 编译项目</li>
+<li>加入mysql驱动和spring-jdbc的jar包</li>
+</ol>
+<h2 id="运行activemq"><a href="#运行activemq" class="headerlink" title="运行activemq"></a>运行activemq</h2><p>进入assembly 项目 test包下运行 IDETest  注意要修改一下用junit运行</p>
+<h2 id="activemq控制台打印修改"><a href="#activemq控制台打印修改" class="headerlink" title="activemq控制台打印修改"></a>activemq控制台打印修改</h2><p>找到activemq-all 项目的log4j文件进行修改</p>
+<h2 id="activemq-mqtt-debug"><a href="#activemq-mqtt-debug" class="headerlink" title="activemq mqtt debug"></a>activemq mqtt debug</h2><p>activemq-broker 靠 <code>org.apache.activemq.transport.tcp.TcpTransport#readCommand</code> 方法接收mqtt客户端发来的数据</p>
+<p>最终由 <code>org.apache.activemq.transport.mqtt.MQTTProtocolConverter#onMQTTPublish</code> 方法把数据发送到 activeMq</p>
+<h2 id="修改-activemq-打包带哪些jar"><a href="#修改-activemq-打包带哪些jar" class="headerlink" title="修改 activemq 打包带哪些jar"></a>修改 activemq 打包带哪些jar</h2><p>修改以下文件即可</p>
+<p><code>activemq-parent-5.15.9\assembly\src\main\descriptors\common-bin.xml</code></p>
+<h2 id="mq-queue-debug"><a href="#mq-queue-debug" class="headerlink" title="mq queue debug"></a>mq queue debug</h2><p>队列接收消息的方法</p>
+<p><code>org.apache.activemq.broker.region.Queue#doMessageSend</code></p>
+<p>队列消息分法</p>
+<p><code>org.apache.activemq.broker.region.Queue#doActualDispatch</code></p>
+<p>broker收到consumer的响应</p>
+<p><code>org.apache.activemq.broker.region.Queue#acknowledge</code></p>
+<p>消息的发送</p>
+<p><code>org.apache.activemq.broker.TransportConnection#dispatch</code></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/消息中间件/">消息中间件</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="https://i.loli.net/2019/08/01/5d42b41fbb08d31663.png" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="https://i.loli.net/2019/08/01/5d42b4b9cf4fa34692.png" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/08/06/Spring-annotation/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Spring注解详解</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/30/hexo+gitpages/">
+                <span class="level-item">Hexo+Gitpages 搭建流程</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
     </div>
 </div>
 
@@ -805,11 +828,11 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="KAMI" height="28">
+                    <img src="/images/logo.svg" alt="ActiveMQ源码启动" height="28">
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 KAMI&nbsp;
+                &copy; 2019 ActiveMQ源码启动&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>

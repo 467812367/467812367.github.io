@@ -142,6 +142,79 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-06T01:30:31.391Z">2019-08-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 451 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/06/ActiveMQ源码启动流程/">ActiveMQ源码启动</a>
+            
+        </h1>
+        <div class="content">
+            <p>ActiveMQ的版本为 5.15.9</p>
+<h2 id="activemq编译流程"><a href="#activemq编译流程" class="headerlink" title="activemq编译流程"></a>activemq编译流程</h2><ol>
+<li>下载源码，然后导入idea里面  进入项目目录执行<code>mvn clean install -Dmaven.test.skip=true</code> 编译，编译可能会出问题，可以按照提示排除，一般问题都能解决，可能会出现有某一个模块怎么编译都有问题，那就先把这个模块去掉</li>
+<li>编译通过后，进入activemq-console模块的Main方法下启动项目，但是启动前先做一些配置，</li>
+</ol>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.setProperty(<span class="hljs-string">"activemq.base"</span>,        <span class="hljs-string">"D:\\ideaworkspace\\activemq-parent-5.15.9-source-release\\activemq-parent-5.15.9\\temp"</span>);</span><br><span class="line">System.setProperty(<span class="hljs-string">"activemq.home"</span>,        <span class="hljs-string">"D:\\ideaworkspace\\activemq-parent-5.15.9-source-release\\activemq-parent-5.15.9\\temp"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>把以上代码加入项目中，然后在项目中新建一个temp目录，把 <code>D:\ideaworkspace\activemq-parent-5.15.9-source-release\activemq-parent-5.15.9\assembly\target</code> 目录下的 activemq.bin.zip解压放入temp下，注解temp目录下必须是bin，conf等目录</p>
+<ol start="3">
+<li>启动Main方法 加入参数 <code>start broker:(tcp://localhost:61616,tcp://localhost:5000)?useJmx=true</code> 即可启动</li>
+</ol>
+<h2 id="activemq源码启动流程"><a href="#activemq源码启动流程" class="headerlink" title="activemq源码启动流程"></a>activemq源码启动流程</h2><ol>
+<li>进入根目录  <code>mvn clean install -DskipTests</code> 编译项目</li>
+<li>加入mysql驱动和spring-jdbc的jar包</li>
+</ol>
+<h2 id="运行activemq"><a href="#运行activemq" class="headerlink" title="运行activemq"></a>运行activemq</h2><p>进入assembly 项目 test包下运行 IDETest  注意要修改一下用junit运行</p>
+<h2 id="activemq控制台打印修改"><a href="#activemq控制台打印修改" class="headerlink" title="activemq控制台打印修改"></a>activemq控制台打印修改</h2><p>找到activemq-all 项目的log4j文件进行修改</p>
+<h2 id="activemq-mqtt-debug"><a href="#activemq-mqtt-debug" class="headerlink" title="activemq mqtt debug"></a>activemq mqtt debug</h2><p>activemq-broker 靠 <code>org.apache.activemq.transport.tcp.TcpTransport#readCommand</code> 方法接收mqtt客户端发来的数据</p>
+<p>最终由 <code>org.apache.activemq.transport.mqtt.MQTTProtocolConverter#onMQTTPublish</code> 方法把数据发送到 activeMq</p>
+<h2 id="修改-activemq-打包带哪些jar"><a href="#修改-activemq-打包带哪些jar" class="headerlink" title="修改 activemq 打包带哪些jar"></a>修改 activemq 打包带哪些jar</h2><p>修改以下文件即可</p>
+<p><code>activemq-parent-5.15.9\assembly\src\main\descriptors\common-bin.xml</code></p>
+<h2 id="mq-queue-debug"><a href="#mq-queue-debug" class="headerlink" title="mq queue debug"></a>mq queue debug</h2><p>队列接收消息的方法</p>
+<p><code>org.apache.activemq.broker.region.Queue#doMessageSend</code></p>
+<p>队列消息分法</p>
+<p><code>org.apache.activemq.broker.region.Queue#doActualDispatch</code></p>
+<p>broker收到consumer的响应</p>
+<p><code>org.apache.activemq.broker.region.Queue#acknowledge</code></p>
+<p>消息的发送</p>
+<p><code>org.apache.activemq.broker.TransportConnection#dispatch</code></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time>
                 
                 <div class="level-item">
@@ -313,7 +386,7 @@ guest.password=password</code></p>
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        10
                     </p>
                 </div>
             </div>
@@ -323,7 +396,7 @@ guest.password=password</code></p>
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        5
                     </p>
                 </div>
             </div>
@@ -333,7 +406,7 @@ guest.password=password</code></p>
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        5
                     </p>
                 </div>
             </div>
@@ -378,9 +451,33 @@ guest.password=password</code></p>
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/MQ/">
             <span class="level-start">
                 <span class="level-item">MQ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Maven/">
+            <span class="level-start">
+                <span class="level-item">Maven</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -405,7 +502,7 @@ guest.password=password</code></p>
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 10px;">消息中间件</a>
+        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
     </div>
 </div>
 
@@ -419,6 +516,82 @@ guest.password=password</code></p>
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/15/Git遇见的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Git问题详解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-15T08:35:07.459Z">2019-08-15</time></div>
+                    <a href="/2019/08/15/Git遇见的问题/" class="has-link-black-ter is-size-6">Git问题详解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/13/Maven/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Maven常用指令">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T08:34:38.673Z">2019-08-13</time></div>
+                    <a href="/2019/08/13/Maven/" class="has-link-black-ter is-size-6">Maven常用指令</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Maven/">Maven</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/Spring-annotation/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring注解详解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T08:16:31.500Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/Spring-annotation/" class="has-link-black-ter is-size-6">Spring注解详解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/ActiveMQ源码启动流程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ源码启动">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T01:30:31.391Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/ActiveMQ源码启动流程/" class="has-link-black-ter is-size-6">ActiveMQ源码启动</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -439,82 +612,6 @@ guest.password=password</code></p>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/26/Mqtt/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mqtt协议讲解">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-26T07:11:38.859Z">2019-07-26</time></div>
-                    <a href="/2019/07/26/Mqtt/" class="has-link-black-ter is-size-6">Mqtt协议讲解</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/25/ActiveMQ/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/19/Spring-batch详解/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/11/AQS原理/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -526,6 +623,17 @@ guest.password=password</code></p>
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -552,6 +660,27 @@ guest.password=password</code></p>
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Maven/">
+                        <span class="tag">Maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring/">
+                        <span class="tag">Spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
                         <span class="tag is-grey">1</span>
@@ -561,7 +690,7 @@ guest.password=password</code></p>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/消息中间件/">
                         <span class="tag">消息中间件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -590,6 +719,82 @@ guest.password=password</code></p>
         
         <article class="media">
             
+            <a href="/2019/08/15/Git遇见的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Git问题详解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-15T08:35:07.459Z">2019-08-15</time></div>
+                    <a href="/2019/08/15/Git遇见的问题/" class="has-link-black-ter is-size-6">Git问题详解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/13/Maven/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Maven常用指令">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T08:34:38.673Z">2019-08-13</time></div>
+                    <a href="/2019/08/13/Maven/" class="has-link-black-ter is-size-6">Maven常用指令</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Maven/">Maven</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/Spring-annotation/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring注解详解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T08:16:31.500Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/Spring-annotation/" class="has-link-black-ter is-size-6">Spring注解详解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/08/06/ActiveMQ源码启动流程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ源码启动">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T01:30:31.391Z">2019-08-06</time></div>
+                    <a href="/2019/08/06/ActiveMQ源码启动流程/" class="has-link-black-ter is-size-6">ActiveMQ源码启动</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/07/30/hexo+gitpages/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
@@ -607,82 +812,6 @@ guest.password=password</code></p>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/26/Mqtt/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mqtt协议讲解">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-26T07:11:38.859Z">2019-07-26</time></div>
-                    <a href="/2019/07/26/Mqtt/" class="has-link-black-ter is-size-6">Mqtt协议讲解</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/25/ActiveMQ/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ 教程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-25T03:58:23.063Z">2019-07-25</time></div>
-                    <a href="/2019/07/25/ActiveMQ/" class="has-link-black-ter is-size-6">ActiveMQ 教程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/19/Spring-batch详解/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring-batch 详解">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-19T09:13:21.359Z">2019-07-19</time></div>
-                    <a href="/2019/07/19/Spring-batch详解/" class="has-link-black-ter is-size-6">Spring-batch 详解</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/11/AQS原理/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ABS执行原理">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T02:33:05.837Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/AQS原理/" class="has-link-black-ter is-size-6">ABS执行原理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -694,6 +823,17 @@ guest.password=password</code></p>
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/07/">
@@ -720,6 +860,27 @@ guest.password=password</code></p>
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Maven/">
+                        <span class="tag">Maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring/">
+                        <span class="tag">Spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
                         <span class="tag is-grey">1</span>
@@ -729,7 +890,7 @@ guest.password=password</code></p>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/消息中间件/">
                         <span class="tag">消息中间件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
