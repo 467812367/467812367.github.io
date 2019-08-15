@@ -166,10 +166,12 @@
             
         </h1>
         <div class="content">
-            <h2 id="IDEA-提交项目到github时出现异常"><a href="#IDEA-提交项目到github时出现异常" class="headerlink" title="IDEA 提交项目到github时出现异常"></a>IDEA 提交项目到github时出现异常</h2><p><code>Push failed: Failed with error: Could not read from remote repository.</code></p>
+            <h2 id="IDEA-提交项目到github时出现异常"><a href="#IDEA-提交项目到github时出现异常" class="headerlink" title="IDEA 提交项目到github时出现异常"></a>IDEA 提交项目到github时出现异常</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Push failed: Failed with error: Could not read from remote repository.</span><br></pre></td></tr></table></figure>
+
 <p>以上这个异常的解决办法</p>
 <p>到需要提交的项目的根目录使用命令,查看地址和github上的地址是否一致，不一致则修改</p>
-<p><code>git remote -v</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin  https://github.com/467812367/leetcode.git (fetch)</span><br><span class="line">origin  https://github.com/467812367/leetcode.git (push)</span><br></pre></td></tr></table></figure>
 
 <p>我的已经改过所以没问题。</p>
@@ -177,8 +179,7 @@
 <figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin  git@github.com/467812367/leetcode.git (fetch)</span><br><span class="line">origin  git@github.com/467812367/leetcode.git (push)</span><br></pre></td></tr></table></figure>
 
 <p>需要重新设置URL再提交即可, 以下命令设置URL</p>
-<p><code>git remote set-url origin https://github.com/467812367/leetcode.git</code></p>
-
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https://github.com/467812367/leetcode.git</span><br></pre></td></tr></table></figure>
         </div>
         
         
@@ -246,7 +247,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        5
+                        6
                     </p>
                 </div>
             </div>
@@ -256,7 +257,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        5
+                        6
                     </p>
                 </div>
             </div>
@@ -333,6 +334,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring-batch/">
+            <span class="level-start">
+                <span class="level-item">Spring-batch</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/hexo/">
             <span class="level-start">
                 <span class="level-item">hexo</span>
@@ -352,7 +361,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
+        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-batch/" style="font-size: 10px;">Spring-batch</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
     </div>
 </div>
 
@@ -526,6 +535,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring/">
                         <span class="tag">Spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-batch/">
+                        <span class="tag">Spring-batch</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -726,6 +742,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring/">
                         <span class="tag">Spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-batch/">
+                        <span class="tag">Spring-batch</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
