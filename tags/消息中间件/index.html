@@ -152,7 +152,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 451 个字)
+                    4 分钟 读完 (大约 553 个字)
                 </span>
                 
                 
@@ -194,7 +194,22 @@
 <p><code>org.apache.activemq.broker.region.Queue#acknowledge</code></p>
 <p>消息的发送</p>
 <p><code>org.apache.activemq.broker.TransportConnection#dispatch</code></p>
+<p>往 topic里面发消息会被 <figure class="highlight plain hljs"><figcaption><span>``` 处理</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">往queue里面发的消息也会被```org.apache.activemq.transport.TransportSupport#doConsume```处理</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##  如何设置自动删除不活跃的队列或主题</span><br><span class="line"></span><br><span class="line">在broker标签下面的 destinationPolicy 里面加入 2个属性</span><br><span class="line"></span><br><span class="line">gcInactiveDestinations=&quot;true&quot; inactiveTimoutBeforeGC=&quot;604800000&quot;</span><br><span class="line"></span><br><span class="line">并且 broker 标签上 加入</span><br><span class="line"></span><br><span class="line">schedulePeriodForDestinationPurge=&quot;60000&quot;</span><br><span class="line"></span><br><span class="line">定时扫描， 上面的示例是60秒。</span><br></pre></td></tr></table></figure></p>
+<destinationpolicy>
+            <policymap>
+              <policyentries>
+                <policyentry topic=">" gcinactivedestinations="true" inactivetimoutbeforegc="604800000">
+                  <pendingmessagelimitstrategy>
+                    <constantpendingmessagelimitstrategy limit="1000">
+                  </constantpendingmessagelimitstrategy></pendingmessagelimitstrategy>
+                </policyentry>
 
+<pre><code>        &lt;policyEntry queue=&quot;&gt;&quot; gcInactiveDestinations=&quot;true&quot; inactiveTimoutBeforeGC=&quot;604800000&quot;/&gt;
+      &lt;/policyEntries&gt;
+    &lt;/policyMap&gt;
+&lt;/destinationPolicy&gt;</code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">``` 				&lt;policyEntry queue=&quot;&gt;&quot; gcInactiveDestinations=&quot;true&quot; inactiveTimoutBeforeGC=&quot;604800000&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+</policyentries></policymap></destinationpolicy>
         </div>
         
         
@@ -225,7 +240,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1925 个字)
+                    13 分钟 读完 (大约 1932 个字)
                 </span>
                 
                 
@@ -307,7 +322,7 @@
 </li>
 </ol>
 <p>⑧ 可以用*号 匹配所有主题进行消费</p>
-<p>例如 /hello/*  可以匹配 /hello/1,/hello/2主题下面的所有消息</p>
+<p>例如 hello.*  可以匹配 hello.1,hello.2主题下面的所有消息，必须.相连才行</p>
 <h2 id="控制台密码修改"><a href="#控制台密码修改" class="headerlink" title="控制台密码修改"></a>控制台密码修改</h2><ul>
 <li>先查看jetty.xml文件里面验证有没有开启, authenticate = true 开启</li>
 </ul>
@@ -386,7 +401,7 @@ guest.password=password</code></p>
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        10
+                        11
                     </p>
                 </div>
             </div>
@@ -396,7 +411,7 @@ guest.password=password</code></p>
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        7
                     </p>
                 </div>
             </div>
@@ -406,7 +421,7 @@ guest.password=password</code></p>
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        7
                     </p>
                 </div>
             </div>
@@ -475,6 +490,14 @@ guest.password=password</code></p>
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Mongo/">
+            <span class="level-start">
+                <span class="level-item">Mongo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Spring/">
             <span class="level-start">
                 <span class="level-item">Spring</span>
@@ -510,7 +533,7 @@ guest.password=password</code></p>
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-batch/" style="font-size: 10px;">Spring-batch</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
+        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongo/" style="font-size: 10px;">Mongo</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-batch/" style="font-size: 10px;">Spring-batch</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
     </div>
 </div>
 
@@ -524,6 +547,25 @@ guest.password=password</code></p>
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/21/Mongo基本操作/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mongo常用指令">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-21T02:10:23.951Z">2019-08-21</time></div>
+                    <a href="/2019/08/21/Mongo基本操作/" class="has-link-black-ter is-size-6">Mongo常用指令</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mongo/">Mongo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -601,25 +643,6 @@ guest.password=password</code></p>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/30/hexo+gitpages/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -638,7 +661,7 @@ guest.password=password</code></p>
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -677,6 +700,13 @@ guest.password=password</code></p>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Maven/">
                         <span class="tag">Maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mongo/">
+                        <span class="tag">Mongo</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -734,6 +764,25 @@ guest.password=password</code></p>
         
         <article class="media">
             
+            <a href="/2019/08/21/Mongo基本操作/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mongo常用指令">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-21T02:10:23.951Z">2019-08-21</time></div>
+                    <a href="/2019/08/21/Mongo基本操作/" class="has-link-black-ter is-size-6">Mongo常用指令</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mongo/">Mongo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/08/15/Git遇见的问题/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Git问题详解">
@@ -808,25 +857,6 @@ guest.password=password</code></p>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/30/hexo+gitpages/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -845,7 +875,7 @@ guest.password=password</code></p>
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -884,6 +914,13 @@ guest.password=password</code></p>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Maven/">
                         <span class="tag">Maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mongo/">
+                        <span class="tag">Mongo</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

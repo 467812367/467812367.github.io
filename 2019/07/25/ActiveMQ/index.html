@@ -16,7 +16,7 @@
 <meta property="og:description" content="ActiveMQ的一些特性和参数 AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  Ac">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-01T09:30:52.488Z">
+<meta property="og:updated_time" content="2019-08-20T10:02:39.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ActiveMQ 教程">
 <meta name="twitter:description" content="ActiveMQ的一些特性和参数 AUTO_ACKNOWLEDGE = 1    自动确认 CLIENT_ACKNOWLEDGE = 2    客户端手动确认 DUPS_OK_ACKNOWLEDGE = 3    自动批量确认 SESSION_TRANSACTED = 0    事务提交并确认 INDIVIDUAL_ACKNOWLEDGE = 4    单条消息确认 activemq 独有  Ac">
@@ -146,7 +146,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1925 个字)
+                    13 分钟 读完 (大约 1932 个字)
                 </span>
                 
                 
@@ -228,7 +228,7 @@
 </li>
 </ol>
 <p>⑧ 可以用*号 匹配所有主题进行消费</p>
-<p>例如 /hello/*  可以匹配 /hello/1,/hello/2主题下面的所有消息</p>
+<p>例如 hello.*  可以匹配 hello.1,hello.2主题下面的所有消息，必须.相连才行</p>
 <h2 id="控制台密码修改"><a href="#控制台密码修改" class="headerlink" title="控制台密码修改"></a>控制台密码修改</h2><ul>
 <li>先查看jetty.xml文件里面验证有没有开启, authenticate = true 开启</li>
 </ul>
@@ -364,7 +364,7 @@ guest.password=password</code></p>
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        10
+                        11
                     </p>
                 </div>
             </div>
@@ -374,7 +374,7 @@ guest.password=password</code></p>
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        7
                     </p>
                 </div>
             </div>
@@ -384,7 +384,7 @@ guest.password=password</code></p>
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        7
                     </p>
                 </div>
             </div>
@@ -453,6 +453,14 @@ guest.password=password</code></p>
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Mongo/">
+            <span class="level-start">
+                <span class="level-item">Mongo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Spring/">
             <span class="level-start">
                 <span class="level-item">Spring</span>
@@ -488,7 +496,7 @@ guest.password=password</code></p>
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-batch/" style="font-size: 10px;">Spring-batch</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
+        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongo/" style="font-size: 10px;">Mongo</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-batch/" style="font-size: 10px;">Spring-batch</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
     </div>
 </div>
 
@@ -502,6 +510,25 @@ guest.password=password</code></p>
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/21/Mongo基本操作/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mongo常用指令">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-21T02:10:23.951Z">2019-08-21</time></div>
+                    <a href="/2019/08/21/Mongo基本操作/" class="has-link-black-ter is-size-6">Mongo常用指令</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mongo/">Mongo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -579,25 +606,6 @@ guest.password=password</code></p>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/30/hexo+gitpages/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -616,7 +624,7 @@ guest.password=password</code></p>
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -655,6 +663,13 @@ guest.password=password</code></p>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Maven/">
                         <span class="tag">Maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mongo/">
+                        <span class="tag">Mongo</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -712,6 +727,25 @@ guest.password=password</code></p>
         
         <article class="media">
             
+            <a href="/2019/08/21/Mongo基本操作/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mongo常用指令">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-21T02:10:23.951Z">2019-08-21</time></div>
+                    <a href="/2019/08/21/Mongo基本操作/" class="has-link-black-ter is-size-6">Mongo常用指令</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mongo/">Mongo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/08/15/Git遇见的问题/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Git问题详解">
@@ -786,25 +820,6 @@ guest.password=password</code></p>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/30/hexo+gitpages/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -823,7 +838,7 @@ guest.password=password</code></p>
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -862,6 +877,13 @@ guest.password=password</code></p>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Maven/">
                         <span class="tag">Maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mongo/">
+                        <span class="tag">Mongo</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

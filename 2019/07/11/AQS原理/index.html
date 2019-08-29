@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>ABS执行原理 - KAMI</title>
+<title>AQS执行原理 - KAMI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
+    <meta name="description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋 CLH是什么CLH锁即Craig, Landin, and Hagersten (CLH) locks。CLH锁是一个自旋锁。能确保无饥饿性。提供先来先服务的公平性。 CLH锁也是一种基于链表的可扩展、高性能、公平的自旋锁，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ABS执行原理">
+<meta property="og:title" content="AQS执行原理">
 <meta property="og:url" content="http://yoursite.com/2019/07/11/AQS原理/index.html">
 <meta property="og:site_name" content="KAMI">
-<meta property="og:description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
+<meta property="og:description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋 CLH是什么CLH锁即Craig, Landin, and Hagersten (CLH) locks。CLH锁是一个自旋锁。能确保无饥饿性。提供先来先服务的公平性。 CLH锁也是一种基于链表的可扩展、高性能、公平的自旋锁，">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-25T08:27:33.873Z">
+<meta property="og:updated_time" content="2019-08-29T04:00:23.773Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ABS执行原理">
-<meta name="twitter:description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋">
+<meta name="twitter:title" content="AQS执行原理">
+<meta name="twitter:description" content="在多线程并发的时候吧，第一个线程拿到了锁，其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋 CLH是什么CLH锁即Craig, Landin, and Hagersten (CLH) locks。CLH锁是一个自旋锁。能确保无饥饿性。提供先来先服务的公平性。 CLH锁也是一种基于链表的可扩展、高性能、公平的自旋锁，">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -93,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="ABS执行原理" height="28">
+                <img src="/images/logo.svg" alt="AQS执行原理" height="28">
             
             </a>
         </div>
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 87 个字)
+                    4 分钟 读完 (大约 637 个字)
                 </span>
                 
                 
@@ -150,11 +150,34 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                ABS执行原理
+                AQS执行原理
             
         </h1>
         <div class="content">
             <p>在多线程并发的时候吧，第一个线程拿到了锁，<br>其他线程则会在获取不到锁的时候被加到一个双向链表中排队，并且自旋循环，等到他的他的前一个节点变成头并且自己获取到锁的时候就会停止自旋</p>
+<h2 id="CLH是什么"><a href="#CLH是什么" class="headerlink" title="CLH是什么"></a>CLH是什么</h2><p>CLH锁即Craig, Landin, and Hagersten (CLH) locks。CLH锁是一个自旋锁。能确保无饥饿性。提供先来先服务的公平性。</p>
+<p>CLH锁也是一种基于链表的可扩展、高性能、公平的自旋锁，申请线程仅仅在本地变量上自旋，它不断轮询前驱的状态，假设发现前驱释放了锁就结束自旋。</p>
+<h2 id="ReentrantLock执行原理"><a href="#ReentrantLock执行原理" class="headerlink" title="ReentrantLock执行原理"></a>ReentrantLock执行原理</h2><p>这个类有2个构造方法</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Creates an instance of &#123;<span class="hljs-doctag">@code</span> ReentrantLock&#125;.</span></span><br><span class="line"><span class="hljs-comment"> * This is equivalent to using &#123;<span class="hljs-doctag">@code</span> ReentrantLock(false)&#125;.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    sync = <span class="hljs-keyword">new</span> NonfairSync();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Creates an instance of &#123;<span class="hljs-doctag">@code</span> ReentrantLock&#125; with the</span></span><br><span class="line"><span class="hljs-comment"> * given fairness policy.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> fair &#123;<span class="hljs-doctag">@code</span> true&#125; if this lock should use a fair ordering policy</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReentrantLock</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> fair)</span> </span>&#123;</span><br><span class="line">    sync = fair ? <span class="hljs-keyword">new</span> FairSync() : <span class="hljs-keyword">new</span> NonfairSync();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>见名知义  ReentrantLock 默认使用的是非公平锁， 你也可以根据参数来决定是什么锁</strong></p>
+<p><strong>执行流程</strong></p>
+<ul>
+<li><p>一旦调用 lock.lock(); 方法 就会执行java.util.concurrent.locks.ReentrantLock.NonfairSync#lock方法，</p>
+<p>该方法会判断这个线程有没有被锁住，没有锁住就锁住当前线程，锁住的话就执行java.util.concurrent.locks.AbstractQueuedSynchronizer#acquire方法</p>
+</li>
+<li><p>acquire 方法会调用addWaiter(Node.EXCLUSIVE) 方法把当前线程当做一个node加入到一个双向链表中，而且是加到列表最后</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> Node <span class="hljs-title">addWaiter</span><span class="hljs-params">(Node mode)</span> </span>&#123;</span><br><span class="line">    Node node = <span class="hljs-keyword">new</span> Node(Thread.currentThread(), mode);</span><br><span class="line">    <span class="hljs-comment">// Try the fast path of enq; backup to full enq on failure</span></span><br><span class="line">    Node pred = tail;</span><br><span class="line">    <span class="hljs-keyword">if</span> (pred != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">        node.prev = pred;</span><br><span class="line">        <span class="hljs-keyword">if</span> (compareAndSetTail(pred, node)) &#123;</span><br><span class="line">            pred.next = node;</span><br><span class="line">            <span class="hljs-keyword">return</span> node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    enq(node);</span><br><span class="line">    <span class="hljs-keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接着acquire 方法会调用acquireQueued(addWaiter(Node.EXCLUSIVE), arg)) 方法让当前节点无限循环判断当前节点的前一个节点是不是head节点并且head节点已经释放了lock的时候，当前节点设置为head节点，获取到lock。其实每一个加入链表中的节点都会加到末尾，并让他们自旋知道自己前一个节点是head节点并且释放锁后就停止自旋，依次加锁释放锁。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">acquireQueued</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Node node, <span class="hljs-keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">boolean</span> failed = <span class="hljs-keyword">true</span>;</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">boolean</span> interrupted = <span class="hljs-keyword">false</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (;;) &#123;</span><br><span class="line">            <span class="hljs-keyword">final</span> Node p = node.predecessor();</span><br><span class="line">            <span class="hljs-keyword">if</span> (p == head &amp;&amp; tryAcquire(arg)) &#123;</span><br><span class="line">                setHead(node);</span><br><span class="line">                p.next = <span class="hljs-keyword">null</span>; <span class="hljs-comment">// help GC</span></span><br><span class="line">                failed = <span class="hljs-keyword">false</span>;</span><br><span class="line">                <span class="hljs-keyword">return</span> interrupted;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">if</span> (shouldParkAfterFailedAcquire(p, node) &amp;&amp;</span><br><span class="line">                parkAndCheckInterrupt())</span><br><span class="line">                interrupted = <span class="hljs-keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (failed)</span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
 
         </div>
         
@@ -261,7 +284,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        10
+                        11
                     </p>
                 </div>
             </div>
@@ -271,7 +294,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        7
                     </p>
                 </div>
             </div>
@@ -281,7 +304,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        7
                     </p>
                 </div>
             </div>
@@ -350,6 +373,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Mongo/">
+            <span class="level-start">
+                <span class="level-item">Mongo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Spring/">
             <span class="level-start">
                 <span class="level-item">Spring</span>
@@ -385,7 +416,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-batch/" style="font-size: 10px;">Spring-batch</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
+        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Mongo/" style="font-size: 10px;">Mongo</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-batch/" style="font-size: 10px;">Spring-batch</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/消息中间件/" style="font-size: 20px;">消息中间件</a>
     </div>
 </div>
 
@@ -399,6 +430,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/21/Mongo基本操作/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mongo常用指令">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-21T02:10:23.951Z">2019-08-21</time></div>
+                    <a href="/2019/08/21/Mongo基本操作/" class="has-link-black-ter is-size-6">Mongo常用指令</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mongo/">Mongo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -476,25 +526,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/30/hexo+gitpages/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -513,7 +544,7 @@
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -552,6 +583,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Maven/">
                         <span class="tag">Maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mongo/">
+                        <span class="tag">Mongo</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -609,6 +647,25 @@
         
         <article class="media">
             
+            <a href="/2019/08/21/Mongo基本操作/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Mongo常用指令">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-21T02:10:23.951Z">2019-08-21</time></div>
+                    <a href="/2019/08/21/Mongo基本操作/" class="has-link-black-ter is-size-6">Mongo常用指令</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mongo/">Mongo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/08/15/Git遇见的问题/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Git问题详解">
@@ -683,25 +740,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/07/30/hexo+gitpages/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo+Gitpages 搭建流程">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-30T06:27:37.078Z">2019-07-30</time></div>
-                    <a href="/2019/07/30/hexo+gitpages/" class="has-link-black-ter is-size-6">Hexo+Gitpages 搭建流程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -720,7 +758,7 @@
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -759,6 +797,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Maven/">
                         <span class="tag">Maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mongo/">
+                        <span class="tag">Mongo</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -808,11 +853,11 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="ABS执行原理" height="28">
+                    <img src="/images/logo.svg" alt="AQS执行原理" height="28">
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 ABS执行原理&nbsp;
+                &copy; 2019 AQS执行原理&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
