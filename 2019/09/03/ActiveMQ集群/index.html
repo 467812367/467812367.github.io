@@ -16,7 +16,7 @@
 <meta property="og:description" content="下载activemqapache-activemq-5.15.9-bin.tar.gz 搭建zookeeper伪集群localhost:2181,localhost:2182,localhost:2183 伪集群部署解压 activemq 去 activemq.xml中添加配置  1234567891011&amp;lt;!-- 持久化的部分为ZooKeeper集群连接地址--&amp;gt;  &amp;lt;pers">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-03T09:15:12.757Z">
+<meta property="og:updated_time" content="2019-09-03T09:21:07.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ActiveMQ集群">
 <meta name="twitter:description" content="下载activemqapache-activemq-5.15.9-bin.tar.gz 搭建zookeeper伪集群localhost:2181,localhost:2182,localhost:2183 伪集群部署解压 activemq 去 activemq.xml中添加配置  1234567891011&amp;lt;!-- 持久化的部分为ZooKeeper集群连接地址--&amp;gt;  &amp;lt;pers">
@@ -146,7 +146,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 142 个字)
+                    1 分钟 读完 (大约 141 个字)
                 </span>
                 
                 
@@ -162,7 +162,7 @@
             <h2 id="下载activemq"><a href="#下载activemq" class="headerlink" title="下载activemq"></a>下载activemq</h2><p>apache-activemq-5.15.9-bin.tar.gz</p>
 <h2 id="搭建zookeeper伪集群"><a href="#搭建zookeeper伪集群" class="headerlink" title="搭建zookeeper伪集群"></a>搭建zookeeper伪集群</h2><p>localhost:2181,localhost:2182,localhost:2183</p>
 <h2 id="伪集群部署"><a href="#伪集群部署" class="headerlink" title="伪集群部署"></a>伪集群部署</h2><p>解压 activemq 去 activemq.xml中添加配置</p>
-<p><img src="../../public/images/1.png" alt></p>
+<p><img src="images/1.png" alt></p>
 <figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!-- 持久化的部分为ZooKeeper集群连接地址--&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">persistenceAdapter</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">replicatedLevelDB</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">directory</span>=<span class="hljs-string">"$&#123;activemq.data&#125;/leveldb"</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">replicas</span>=<span class="hljs-string">"3"</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">bind</span>=<span class="hljs-string">"tcp://0.0.0.0:0"</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">zkAddress</span>=<span class="hljs-string">"localhost:2181,localhost:2182,localhost:2183"</span>   </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">zkPath</span>=<span class="hljs-string">"/usr/local/activemq/leveldb-stores"</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">hostname</span>=<span class="hljs-string">"localhost"</span>  </span></span><br><span class="line"><span class="hljs-tag">      /&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">persistenceAdapter</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>把整个activemq 目录复制几份,修改端口依次启动即可</p>
