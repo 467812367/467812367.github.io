@@ -142,6 +142,59 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-03T09:03:44.027Z">2019-09-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 142 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/09/03/ActiveMQ集群/">ActiveMQ集群</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="下载activemq"><a href="#下载activemq" class="headerlink" title="下载activemq"></a>下载activemq</h2><p>apache-activemq-5.15.9-bin.tar.gz</p>
+<h2 id="搭建zookeeper伪集群"><a href="#搭建zookeeper伪集群" class="headerlink" title="搭建zookeeper伪集群"></a>搭建zookeeper伪集群</h2><p>localhost:2181,localhost:2182,localhost:2183</p>
+<h2 id="伪集群部署"><a href="#伪集群部署" class="headerlink" title="伪集群部署"></a>伪集群部署</h2><p>解压 activemq 去 activemq.xml中添加配置</p>
+<p><img src="../../public/images/1.png" alt></p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!-- 持久化的部分为ZooKeeper集群连接地址--&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">persistenceAdapter</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">replicatedLevelDB</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">directory</span>=<span class="hljs-string">"$&#123;activemq.data&#125;/leveldb"</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">replicas</span>=<span class="hljs-string">"3"</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">bind</span>=<span class="hljs-string">"tcp://0.0.0.0:0"</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">zkAddress</span>=<span class="hljs-string">"localhost:2181,localhost:2182,localhost:2183"</span>   </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">zkPath</span>=<span class="hljs-string">"/usr/local/activemq/leveldb-stores"</span>  </span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">hostname</span>=<span class="hljs-string">"localhost"</span>  </span></span><br><span class="line"><span class="hljs-tag">      /&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">persistenceAdapter</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>把整个activemq 目录复制几份,修改端口依次启动即可</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>集群中 activemq 至少有2台存活时，消息一切正常，低于2台时，消息阻塞，将会一直等待mq恢复</p>
+<p>集群中zk超过半数正常，整个集群正常，少于半数，则mq也会受到影响</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-08-06T01:30:31.391Z">2019-08-06</time>
                 
                 <div class="level-item">
@@ -401,7 +454,7 @@ guest.password=password</code></p>
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        11
+                        12
                     </p>
                 </div>
             </div>
@@ -479,7 +532,7 @@ guest.password=password</code></p>
                 <span class="level-item">MQ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Maven/">
@@ -550,6 +603,25 @@ guest.password=password</code></p>
         
         <article class="media">
             
+            <a href="/2019/09/03/ActiveMQ集群/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ集群">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-03T09:03:44.027Z">2019-09-03</time></div>
+                    <a href="/2019/09/03/ActiveMQ集群/" class="has-link-black-ter is-size-6">ActiveMQ集群</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/08/21/Mongo基本操作/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Mongo常用指令">
@@ -624,25 +696,6 @@ guest.password=password</code></p>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/06/ActiveMQ源码启动流程/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ源码启动">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T01:30:31.391Z">2019-08-06</time></div>
-                    <a href="/2019/08/06/ActiveMQ源码启动流程/" class="has-link-black-ter is-size-6">ActiveMQ源码启动</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -654,6 +707,17 @@ guest.password=password</code></p>
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/08/">
@@ -735,7 +799,7 @@ guest.password=password</code></p>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/消息中间件/">
                         <span class="tag">消息中间件</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -764,6 +828,25 @@ guest.password=password</code></p>
         
         <article class="media">
             
+            <a href="/2019/09/03/ActiveMQ集群/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ集群">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-03T09:03:44.027Z">2019-09-03</time></div>
+                    <a href="/2019/09/03/ActiveMQ集群/" class="has-link-black-ter is-size-6">ActiveMQ集群</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/08/21/Mongo基本操作/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Mongo常用指令">
@@ -838,25 +921,6 @@ guest.password=password</code></p>
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/08/06/ActiveMQ源码启动流程/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ActiveMQ源码启动">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-06T01:30:31.391Z">2019-08-06</time></div>
-                    <a href="/2019/08/06/ActiveMQ源码启动流程/" class="has-link-black-ter is-size-6">ActiveMQ源码启动</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -868,6 +932,17 @@ guest.password=password</code></p>
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/08/">
@@ -949,7 +1024,7 @@ guest.password=password</code></p>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/消息中间件/">
                         <span class="tag">消息中间件</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 

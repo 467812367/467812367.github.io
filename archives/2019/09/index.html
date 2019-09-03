@@ -2,23 +2,19 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>Mqtt协议讲解 - KAMI</title>
+<title>归档: 2019/9 - KAMI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="MQTT 数据包结构1MqttPublishMessage[fixedHeader=MqttFixedHeader[messageType=PUBLISH, isDup=false, qosLevel=AT_MOST_ONCE, isRetain=false, remainingLength=8], variableHeader=MqttPublishVariableHeader[topicNam">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Mqtt协议讲解">
-<meta property="og:url" content="http://yoursite.com/2019/07/26/Mqtt/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="KAMI">
+<meta property="og:url" content="http://yoursite.com/archives/2019/09/index.html">
 <meta property="og:site_name" content="KAMI">
-<meta property="og:description" content="MQTT 数据包结构1MqttPublishMessage[fixedHeader=MqttFixedHeader[messageType=PUBLISH, isDup=false, qosLevel=AT_MOST_ONCE, isRetain=false, remainingLength=8], variableHeader=MqttPublishVariableHeader[topicNam">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-30T09:19:44.124Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mqtt协议讲解">
-<meta name="twitter:description" content="MQTT 数据包结构1MqttPublishMessage[fixedHeader=MqttFixedHeader[messageType=PUBLISH, isDup=false, qosLevel=AT_MOST_ONCE, isRetain=false, remainingLength=8], variableHeader=MqttPublishVariableHeader[topicNam">
+<meta name="twitter:title" content="KAMI">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -93,7 +89,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Mqtt协议讲解" height="28">
+                <img src="/images/logo.svg" alt="KAMI" height="28">
             
             </a>
         </div>
@@ -129,177 +125,35 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-26T07:11:38.859Z">2019-07-26</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1023 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                Mqtt协议讲解
-            
-        </h1>
-        <div class="content">
-            <h2 id="MQTT-数据包结构"><a href="#MQTT-数据包结构" class="headerlink" title="MQTT 数据包结构"></a>MQTT 数据包结构</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MqttPublishMessage[fixedHeader=MqttFixedHeader[messageType=PUBLISH, isDup=<span class="hljs-keyword">false</span>, qosLevel=AT_MOST_ONCE, isRetain=<span class="hljs-keyword">false</span>, remainingLength=<span class="hljs-number">8</span>], variableHeader=MqttPublishVariableHeader[topicName=test, packetId=-<span class="hljs-number">1</span>], payload=PooledSlicedByteBuf(ridx: <span class="hljs-number">0</span>, widx: <span class="hljs-number">2</span>, cap: <span class="hljs-number">2</span>/<span class="hljs-number">2</span>, unwrapped: PooledUnsafeDirectByteBuf(ridx: <span class="hljs-number">10</span>, widx: <span class="hljs-number">10</span>, cap: <span class="hljs-number">1024</span>))]</span><br></pre></td></tr></table></figure>
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 
-<ul>
-<li>固定头（Fixed header），存在于所有MQTT数据包中，表示数据包类型及数据包的分组类标识</li>
-<li>可变头（Variable header），存在于部分MQTT数据包中，数据包类型决定了可变头是否存在及其具体内容</li>
-<li>消息体（Payload），存在于部分MQTT数据包中，表示客户端收到的具体内容</li>
-</ul>
-<h3 id="固定头"><a href="#固定头" class="headerlink" title="固定头"></a>固定头</h3><pre><code>由2个byte组成   1个byte=8bit （这里要理清楚哪边是高位） 
-例如16 =  0001 0000 bit0-3 = 0000 retain = 0, qos = 00, dup = 0 ）
-第一个byte 分为8bit  bit0-bit3表示
-
-bit0 = retain(发布保留标识，表示服务器要保留这次推送的信息，如果有新的订阅者出现，就把这消息推送给它，如果设有那么推送至当前订阅者后释放。)
-
-bit1-2 = qos 
-发布消息的服务质量，即：保证消息传递的次数
-00：最多一次，即：&lt;=1
-01：至少一次，即：&gt;=1
-10：一次，即：=1
-11：预留
-
-bit3 = dup (发布消息的副本。用来在保证消息的可靠传输，如果设置为 1，则在下面的变长中增加MessageId，并且需要回复确认，以保证消息传输完成，但不能用于检测消息重复发送。)
-
-bit4-7 消息类型  （例如16 =  0001 0000 bit4-7 = 0001 = 1 = CONNECT ）
-名称    值    流方向    描述
-Reserved    0    不可用    保留位
-CONNECT    1    客户端到服务器    客户端请求连接到服务器
-CONNACK    2    服务器到客户端    连接确认
-PUBLISH    3    双向    发布消息
-PUBACK    4    双向    发布确认
-PUBREC    5    双向    发布收到（保证第1部分到达）
-PUBREL    6    双赂    发布释放（保证第2部分到达）
-PUBCOMP    7    双向    发布完成（保证第3部分到达）
-SUBSCRIBE    8    客户端到服务器    客户端请求订阅
-SUBACK    9    服务器到客户端    订阅确认
-UNSUBSCRIBE    10    客户端到服务器    请求取消订阅
-UNSUBACK    11    服务器到客户端    取消订阅确认
-PINGREQ    12    客户端到服务器    PING请求
-PINGRESP    13    服务器到客户端    PING应答
-DISCONNECT    14    客户端到服务器    中断连接
-Reserved    15    不可用    保留位
-
-第二个byte 消息的长度</code></pre><h3 id="最终结构"><a href="#最终结构" class="headerlink" title="最终结构"></a>最终结构</h3><pre><code>    Description    7    6    5    4    3    2    1    0
-Fixed header/固定头部
-        Message Type(1)    DUP flag    QoS level    RETAIN
-byte 1
-    0    0    0    1    x    x    x    x
-byte 2    Remaining Length
-Variable header/可变头部
-Protocol Name
-byte 1    Length MSB (0)    0    0    0    0    0    0    0    0
-byte 2    Length LSB (6)    0    0    0    0    0    1    1    0
-byte 3    &apos;M&apos;    0    1    0    0    1    1    0    1
-byte 4    &apos;Q&apos;    0    1    0    1    0    0    0    1
-byte 5    &apos;I&apos;    0    1    0    0    1    0    0    1
-byte 6    &apos;s&apos;    0    1    1    1    0    0    1    1
-byte 7    &apos;d&apos;    0    1    1    0    0    1    0    0
-byte 8    &apos;p&apos;    0    1    1    1    0    0    0    0
-Protocol Version Number
-byte 9    Version (3)    0    0    0    0    0    0    1    1
-Connect Flags
-    User Name Flag    Password Flag    Will Retain    Will QoS    Will Flag    Clean Session    Reserved
-byte 10
-1    1    0    0    1    1    1    x
-Keep Alive timer
-byte 11    Keep Alive MSB (0)    0    0    0    0    0    0    0    0
-byte 12    Keep Alive LSB (10)    0    0    0    0    1    0    1    0
-Playload/消息体
-Client Identifier(客户端ID)
-
-1-23个字符长度，客户端到服务器的全局唯一标志，如果客户端ID超出23个字符长度，服务器需要返回码为2，标识符被拒绝响应的CONNACK消息。
-处理QoS级别1和2的消息ID中，可以使用到。
-必填项。
-Will Topic
-
-Will Flag值为1，这里便是Will Topic的内容。QoS级别通过Will QoS字段定义，RETAIN值通过Will RETAIN标识，都定义在可变头里面。
-Will Message
-
-Will Flag若设为1，这里便是Will Message定义消息的内容，对应的主题为Will Topic。如果客户端意外的断开触发服务器PUBLISH此消息。
-长度有可能为0。
-在CONNECT消息中的Will Message是UTF-8编码的，当被服务器发布时则作为二进制的消息体。
-User Name
-
-如果设置User Name标识，可以在此读取用户名称。一般可用于身份验证。协议建议用户名为不多于12个字符，不是必须。
-Password
-
-如果设置Password标识，便可读取用户密码。建议密码为12个字符或者更少，但不是必须。</code></pre><p><img src="https://i.loli.net/2019/07/30/5d400a870c9c251324.png" alt="QQ截图20190730171411.png"></p>
-<p><img src="https://i.loli.net/2019/07/30/5d400ac89c49395126.png" alt="QQ截图20190730171540.png"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-<div class="card">
+<div class="card widget">
     <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
+        <h3 class="tag is-link">
+        九月 2019
+        </h3>
+        <div class="timeline">
+        
+            <article class="media">
                 
-<a class="button is-info donate">
-    <span class="icon is-small">
-        <i class="fab fa-alipay"></i>
-    </span>
-    <span>支付宝</span>
-    <div class="qrcode"><img src="https://i.loli.net/2019/08/01/5d42b41fbb08d31663.png" alt="支付宝"></div>
-</a>
-
-                
-                
-<a class="button is-success donate">
-    <span class="icon is-small">
-        <i class="fab fa-weixin"></i>
-    </span>
-    <span>微信</span>
-    <div class="qrcode"><img src="https://i.loli.net/2019/08/01/5d42b4b9cf4fa34692.png" alt="微信"></div>
-</a>
-
-                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-09-03T09:03:44.027Z">2019-09-03</time>
+                        <a href="/2019/09/03/ActiveMQ集群/" class="has-link-black-ter is-size-6">ActiveMQ集群</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                                <div class="level-item is-size-7 is-uppercase">
+                                <a class="has-link-grey -link" href="/categories/MQ/">MQ</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
         </div>
-    </div>
-</div>
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/30/hexo+gitpages/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Hexo+Gitpages 搭建流程</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/25/ActiveMQ/">
-                <span class="level-item">ActiveMQ 教程</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
     </div>
 </div>
 
@@ -938,11 +792,11 @@ Password
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Mqtt协议讲解" height="28">
+                    <img src="/images/logo.svg" alt="KAMI" height="28">
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 Mqtt协议讲解&nbsp;
+                &copy; 2019 KAMI&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
